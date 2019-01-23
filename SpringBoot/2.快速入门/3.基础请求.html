@@ -1,0 +1,765 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next gemini use-motion" lang="zh-Hans">
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="Hexo, NexT">
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="3.基础请求实现前面的内容我们建立的新项目，不知道你的新项目跑起来心情如何。 但无论心情如何，都应该确保之前的你已经搞定了，而且已经准备好迎接下边的挑战了。 准备上篇文章的Hello World项目 PostMan软件已经安装好 1. Get请求了解Http的同学都知道网络请求包括get/post/put/delete等等方式，如果不清楚的话可以自行补课或者参考  本部分技术补充大致了解一下。 其">
+<meta property="og:type" content="website">
+<meta property="og:title" content="苏·凌">
+<meta property="og:url" content="https://surine.cn/SpringBoot/2.快速入门/3.基础请求.html">
+<meta property="og:site_name" content="苏·凌">
+<meta property="og:description" content="3.基础请求实现前面的内容我们建立的新项目，不知道你的新项目跑起来心情如何。 但无论心情如何，都应该确保之前的你已经搞定了，而且已经准备好迎接下边的挑战了。 准备上篇文章的Hello World项目 PostMan软件已经安装好 1. Get请求了解Http的同学都知道网络请求包括get/post/put/delete等等方式，如果不清楚的话可以自行补课或者参考  本部分技术补充大致了解一下。 其">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="https://surine.cn/SpringBoot/2.快速入门/assets/1547707042067.png">
+<meta property="og:image" content="https://surine.cn/SpringBoot/2.快速入门/assets/1547707810805.png">
+<meta property="og:image" content="https://surine.cn/SpringBoot/2.快速入门/assets/1547707838737.png">
+<meta property="og:image" content="https://surine.cn/SpringBoot/2.快速入门/assets/1547707956041.png">
+<meta property="og:image" content="https://surine.cn/SpringBoot/2.快速入门/assets/1547707976276.png">
+<meta property="og:image" content="https://surine.cn/SpringBoot/2.快速入门/assets/1547708017369.png">
+<meta property="og:image" content="https://surine.cn/SpringBoot/2.快速入门/assets/1547708033293.png">
+<meta property="og:image" content="https://surine.cn/SpringBoot/2.快速入门/assets/1547709616459.png">
+<meta property="og:image" content="https://surine.cn/SpringBoot/2.快速入门/assets/1547709694559.png">
+<meta property="og:image" content="https://surine.cn/SpringBoot/2.快速入门/assets/1547709738780.png">
+<meta property="og:image" content="https://surine.cn/SpringBoot/2.快速入门/assets/1547710624847.png">
+<meta property="og:image" content="https://surine.cn/SpringBoot/2.快速入门/assets/1547711372524.png">
+<meta property="og:image" content="https://surine.cn/SpringBoot/2.快速入门/assets/1547711409054.png">
+<meta property="og:image" content="https://surine.cn/SpringBoot/2.快速入门/assets/1547711454251.png">
+<meta property="og:image" content="https://surine.cn/SpringBoot/2.快速入门/assets/1547712870748.png">
+<meta property="og:updated_time" content="2019-01-23T01:27:13.928Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="苏·凌">
+<meta name="twitter:description" content="3.基础请求实现前面的内容我们建立的新项目，不知道你的新项目跑起来心情如何。 但无论心情如何，都应该确保之前的你已经搞定了，而且已经准备好迎接下边的挑战了。 准备上篇文章的Hello World项目 PostMan软件已经安装好 1. Get请求了解Http的同学都知道网络请求包括get/post/put/delete等等方式，如果不清楚的话可以自行补课或者参考  本部分技术补充大致了解一下。 其">
+<meta name="twitter:image" content="https://surine.cn/SpringBoot/2.快速入门/assets/1547707042067.png">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Gemini',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="https://surine.cn/SpringBoot/2.快速入门/3.基础请求.html">
+
+
+
+
+
+  <title> | 苏·凌</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope="" itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope="" itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">苏·凌</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">技术男不会搞技术。</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br>
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br>
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br>
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-springboot学习笔记">
+          <a href="/SpringBoot/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br>
+            
+            SpringBoot学习笔记
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-commonweal">
+          <a href="/404/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-heartbeat"></i> <br>
+            
+            公益404
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-图片">
+          <a href="/photo" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br>
+            
+            图片
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+    
+    
+    <div class="post-block page">
+      <header class="post-header">
+
+	<h1 class="post-title" itemprop="name headline"></h1>
+
+
+
+</header>
+
+      
+      
+      
+      <div class="post-body">
+        
+        
+          <h1 id="3-基础请求实现"><a href="#3-基础请求实现" class="headerlink" title="3.基础请求实现"></a>3.基础请求实现</h1><p>前面的内容我们建立的新项目，不知道你的新项目跑起来心情如何。</p>
+<p>但无论心情如何，都应该确保之前的你已经搞定了，而且已经准备好迎接下边的挑战了。</p>
+<h2 id="准备"><a href="#准备" class="headerlink" title="准备"></a>准备</h2><p>上篇文章的<strong>Hello World项目</strong></p>
+<p><strong>PostMan</strong>软件已经安装好</p>
+<h2 id="1-Get请求"><a href="#1-Get请求" class="headerlink" title="1. Get请求"></a>1. Get请求</h2><p>了解Http的同学都知道网络请求包括get/post/put/delete等等方式，如果不清楚的话可以自行补课或者参考  <a href="/SpringBoot/2.快速入门/0.技术补充.html">本部分技术补充</a>大致了解一下。</p>
+<p>其实要说来，我们上篇文章的Hello实验也是get请求，那么正儿八经的get是啥样子?</p>
+<p>在HelloController里继续写一个方法。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment">    * 通过get请求去注册</span></span><br><span class="line"><span class="comment">    * <span class="doctag">@param</span> nameFromClient  用户名</span></span><br><span class="line"><span class="comment">    * <span class="doctag">@param</span> pswdFromClient  密码</span></span><br><span class="line"><span class="comment">    * <span class="doctag">@return</span> 状态信息</span></span><br><span class="line"><span class="comment">    */</span></span><br><span class="line">   <span class="meta">@RequestMapping</span>(value = <span class="string">"/register"</span>,method = RequestMethod.GET)</span><br><span class="line">   <span class="function"><span class="keyword">public</span> String <span class="title">register</span><span class="params">(@RequestParam(value = <span class="string">"name"</span>)</span> String nameFromClient,</span></span><br><span class="line"><span class="function">                          @<span class="title">RequestParam</span><span class="params">(value = <span class="string">"pswd"</span>, required = <span class="keyword">false</span>)</span> String pswdFromClient)</span>&#123;</span><br><span class="line">       </span><br><span class="line">       System.out.println(<span class="string">"姓名"</span>+nameFromClient);</span><br><span class="line">       System.out.println(<span class="string">"密码"</span>+pswdFromClient);</span><br><span class="line">       </span><br><span class="line">       <span class="keyword">if</span>(nameFromClient.equals(<span class="string">"surine"</span>))&#123;</span><br><span class="line">           <span class="keyword">return</span> <span class="string">"不允许使用此名字注册"</span>;</span><br><span class="line">       &#125;<span class="keyword">else</span>&#123;</span><br><span class="line">           <span class="keyword">return</span> <span class="string">"注册成功"</span>;</span><br><span class="line">       &#125;</span><br><span class="line">   &#125;</span><br></pre></td></tr></table></figure>
+<p>这块代码发上来排版不是很好看，我这里简单解释一下，首先我们创建一个register方法，通过上述代码最上面的javadoc注释我们可以知道，他接受两个参数，一个是账号，一个是密码，返回注册的状态。</p>
+<p>对于方法内部的逻辑我是简单的写了几句，如果用户名是surine,那么就提示不允许，否则就提示注册成功，我们可以简单的使用System.out.println来打印从前端接收的字段值，来检查到底是哪里出了问题</p>
+<p>注解方面，register方法上面的注解RequestMapping我们上面提到过，他的value主要是我们的访问路径，而他的method主要是标识我们是一个GET方法，还是一个POST方法，或者其他，默认是GET，所以你需要GET方法的时候，也可以不写这个,这也就是我上面说，上篇文章学到的也是一个Get请求的原因了。</p>
+<p>此外我们看到方法中每个参数都有一个@RequestParam，这里我想你应该可以想到，也就是我们客户端访问时候的字段名，到后台分发处理的时候，可以对应成相应的参数，上次我们学到的getHello接口，仅仅是没有参数而已。</p>
+<p>好了，别的不多说，我们看看运行效果，点击运行后，我们在浏览器访问：localhost:8080/register</p>
+<p><img src="assets/1547707042067.png" alt="1547707042067"></p>
+<p>是一个错误页（PS：当本页面看不出什么东西来的时候，具体的错误可以去IDE控制台看），我们可以看到最后一行，name这个参数没有，产生这个的原因是这里的@RequestParam是默认每个字段必须要有值的，比如你想实现密码可以为空，你可以这么写</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@RequestParam</span>(value = <span class="string">"pswd"</span>, required = <span class="keyword">false</span>) String pswdFromClient</span><br></pre></td></tr></table></figure>
+<p> 当然这里面还有很多功能，比如设置默认值，想查看有的功能，可以使用快捷键 （按住Ctrl ，单击你要查看的方法，比如这里我们是RequestParam注解，就可以进入他的定义）</p>
+<p>那么我们正常应该怎么访问？</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">localhost:8080/register?name=surine&amp;pswd=12345</span><br></pre></td></tr></table></figure>
+<p>Get请求请自行补课，我们传入了name=surine&amp;pswd=12345,前端结果如下</p>
+<p><img src="assets/1547707810805.png" alt="1547707810805"></p>
+<p>后端控制台如下：</p>
+<p><img src="assets/1547707838737.png" alt="1547707838737"></p>
+<p>我们可以看到从前台发的东西传到后台来了，我们再来实施其他几种情况</p>
+<p>用户名正常，密码不为空：</p>
+<p><img src="assets/1547707956041.png" alt="1547707956041"></p>
+<p><img src="assets/1547707976276.png" alt="1547707976276"></p>
+<p>用户名正常，密码为空：</p>
+<p><img src="assets/1547708017369.png" alt="1547708017369"></p>
+<p><img src="assets/1547708033293.png" alt="1547708033293"></p>
+<p>OK，如果你看到你期望的结果了，那么恭喜你，简单的get请求你已经会了。</p>
+<h2 id="2-Post请求"><a href="#2-Post请求" class="headerlink" title="2. Post请求"></a>2. Post请求</h2><p>  继续在HelloController中添加方法</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 通过post请求去注册</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@param</span> nameFromClient  用户名</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@param</span> pswdFromClient  密码</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@return</span> 状态信息</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="meta">@RequestMapping</span>(value = <span class="string">"/login"</span>, method = RequestMethod.POST)</span><br><span class="line">    <span class="function"><span class="keyword">public</span> String <span class="title">login</span><span class="params">(@RequestParam(value = <span class="string">"name"</span>)</span> String nameFromClient,</span></span><br><span class="line"><span class="function">                        @<span class="title">RequestParam</span><span class="params">(value = <span class="string">"pswd"</span>)</span> String pswdFromClient) </span>&#123;</span><br><span class="line">        </span><br><span class="line">        System.out.println(<span class="string">"姓名"</span>+nameFromClient);</span><br><span class="line">        System.out.println(<span class="string">"密码"</span>+pswdFromClient);</span><br><span class="line">        </span><br><span class="line">        <span class="keyword">if</span>(nameFromClient.equals(<span class="string">"surine"</span>))&#123;</span><br><span class="line">            <span class="keyword">return</span> <span class="string">"无此用户"</span>;</span><br><span class="line">        &#125;<span class="keyword">else</span>&#123;</span><br><span class="line">            <span class="keyword">return</span> <span class="string">"登录成功"</span>;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+<p>实现过Get请求的你对Post请求也没什么疑问吧，实现一个Get和实现Post是一样的，唯一的不同就是RequestMapping的method被我们改成了post。</p>
+<p>那我们运行修改后的项目，打开Postman </p>
+<p><img src="assets/1547709616459.png" alt="1547709616459"></p>
+<p>图很粗糙，凑合看吧。</p>
+<p>第一步选择请求方法，然后填入我们的请求地址，点击Body填入相应字段和字段值，点击Send按钮，即可看到相应信息。</p>
+<p><img src="assets/1547709694559.png" alt="1547709694559"></p>
+<p>同样，我们后端收到了。</p>
+<p>再看一下另一种情况,账号为surine</p>
+<p><img src="assets/1547709738780.png" alt="1547709738780"></p>
+<p>可以看到我们后台的逻辑生效了。</p>
+<p>此外由于这次我们设置允许字段可以为空，所以两个字段必须全部填写。</p>
+<p>到这里你也学会了简单的Post请求了，可能你会有个小疑问，感觉看起来Get和Post请求一样啊，都是发数据然后获取相应结果，那什么时候需要get，什么时候需要post，这个其实也算计算机网络补课内容了。</p>
+<p>我可以简单的描述一下，比如说我们注册一个用户，简单的就是发送账号密码到后台，后台存放到 数据库，并返回注册成功与否。</p>
+<p>再比如请求小王的QQ空间动态，是发小王账号到后台，后台根据小王的账号查询数据库获取他的动态信息返回到前台的</p>
+<p>像前者是以发送数据存储为目的，这个我们就用post，后者主要是以获取/查询数据为目的，我们就用get，另外restful里面的put，delete等等都有具体的作用，我们可以再提。</p>
+<p>仔细分析分析你所面临的工程，你就可以知道哪个请求用get，哪个用post了，此外像get，账号密码直接跟在链接后面是很容易看到的，不安全，而刚才我们测试的post会发现，账号密码没有跟在链接后面的，而且也需要特殊的工具才能发送post，浏览器是不行的。</p>
+<p>经过上述分析，你可以大致理解哪样的功能需要用哪样的请求方法。</p>
+<p>不多扯了，下面再看一个重要的实现。</p>
+<h2 id="3-Bean映射"><a href="#3-Bean映射" class="headerlink" title="3. Bean映射"></a>3. Bean映射</h2><p>bean自行补课 <a href="/SpringBoot/2.快速入门/0.技术补充.html">本部分技术补充</a></p>
+<p>这里越来越接近我们最后的基础项目的样子了，我们新建立一个Package，叫Entities（实体类），并且在其中建立一个名字叫UserEntity的类。</p>
+<p><img src="assets/1547710624847.png" alt="1547710624847"></p>
+<p>然后我们赋予它几个字段</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">UserEntity</span> </span>&#123;</span><br><span class="line">    <span class="keyword">private</span> String userName;  <span class="comment">//姓名</span></span><br><span class="line">    <span class="keyword">private</span> String passWord;  <span class="comment">//密码</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>然后实现他的构造和getter/setter和toString方法，实现如下：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">UserEntity</span> </span>&#123;</span><br><span class="line">    <span class="keyword">private</span> String userName;  <span class="comment">//姓名</span></span><br><span class="line">    <span class="keyword">private</span> String passWord;  <span class="comment">//密码</span></span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">UserEntity</span><span class="params">(String userName, String passWord)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.userName = userName;</span><br><span class="line">        <span class="keyword">this</span>.passWord = passWord;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> String <span class="title">getUserName</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> userName;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setUserName</span><span class="params">(String userName)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.userName = userName;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> String <span class="title">getPassWord</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> passWord;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setPassWord</span><span class="params">(String passWord)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.passWord = passWord;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> String <span class="title">toString</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="string">"UserEntity&#123;"</span> +</span><br><span class="line">                <span class="string">"userName='"</span> + userName + <span class="string">'\''</span> +</span><br><span class="line">                <span class="string">", passWord='"</span> + passWord + <span class="string">'\''</span> +</span><br><span class="line">                <span class="string">'&#125;'</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>这里千万不要手写……也不要复制我这个，你可以试试在class的大括号中按alt+insert，点击选择构造，getter，setter，或者toString各种各样的，选择之后可以生成对应字段的相应方法，或者ctrl+A全选实现全部字段的相应方法。</p>
+<p>Idea的快捷键常用的也就那几个，多用几次就熟了。</p>
+<p>实现之后，我们再回到我们的HelloController来看。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@RequestMapping</span>(value = <span class="string">"/beanRegister"</span>)</span><br><span class="line">     <span class="function"><span class="keyword">public</span> String <span class="title">beanRegister</span><span class="params">(UserEntity userEntity)</span></span>&#123;</span><br><span class="line">         System.out.println(userEntity);</span><br><span class="line">         <span class="keyword">if</span>(userEntity.getUserName().equals(<span class="string">"surine"</span>))&#123;</span><br><span class="line">             <span class="keyword">return</span> <span class="string">"不允许注册surine"</span>;</span><br><span class="line">         &#125;<span class="keyword">else</span> &#123;</span><br><span class="line">             <span class="keyword">return</span> <span class="string">"注册成功"</span>;</span><br><span class="line">         &#125;</span><br><span class="line">     &#125;</span><br></pre></td></tr></table></figure>
+<p>这样看来，我们的方法变得很简洁，beanRegister方法接受UserEntity对象，返回String，RequestMapping你更是了如指掌，不必多说。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">System.out.println(userEntity);</span><br></pre></td></tr></table></figure>
+<p>直接打印对象会在控制台显示他的toString内容，也就是我们刚才生成的那一堆代码里的。你一会可以检验一下。</p>
+<p>其他内容不说了，我们一直都在用这么个逻辑……快吐了！</p>
+<p>重新运行。</p>
+<p>由于是个默认get请求，所以打开浏览器。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">http://localhost:8080/beanRegister?userName=surine&amp;passWord=123</span><br></pre></td></tr></table></figure>
+<p>我写了这样一个请求，结果如下</p>
+<p><img src="assets/1547711372524.png" alt="1547711372524"></p>
+<p>同理，如果我换个名字的话，</p>
+<p><img src="assets/1547711409054.png" alt="1547711409054"></p>
+<p>我们看一下后端控制台</p>
+<p><img src="assets/1547711454251.png" alt="1547711454251"></p>
+<p>两次打印的信息，可以看看是不是toString方法的内容，你也可以修改修改toString中相应的文字部分来看看。</p>
+<p>我想你应该对Springboot有一定的理解了，好多字段，或者其他只要对应就可以访问，正如我们刚才用的url</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">http://localhost:8080/beanRegister?userName=surine&amp;passWord=123</span><br></pre></td></tr></table></figure>
+<p>userName和passWord字段正是我们的UserEntity里面的两个字段，这个时候你就可以举一反三了，比如你可以改一个字段名字，改一下Url，漏写一个字段字母，在UserEntity中加一个字段……各种各样的方式，肯定是有各种各样的错误，有能出现正确结果的欢迎show me，我就不一一测试了。</p>
+<p>当然你会问，如果我的需求是用户名不必填写，在前面的实现中我们是设置require字段来配置的，这里呢？我们可以直接把UserEntity中userName字段上面加如下注解，就可以在请求中不用发送userName字段了。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">UserEntity</span> </span>&#123;</span><br><span class="line">    <span class="meta">@JsonIgnore</span></span><br><span class="line">    <span class="keyword">private</span> String userName;  <span class="comment">//姓名</span></span><br><span class="line">    <span class="keyword">private</span> String passWord;  <span class="comment">//密码</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>所以这种方法就很fashion，真正的工程，也基本上会是这样。所以我在本节开篇的地方说，越来越接近正式项目的样子了不是没有道理的。</p>
+<p>对于Post我就不再多说了。改一下Method即可。</p>
+<p>我实现的beanLogin方法如下,你可以先实现实现，再看我的。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@RequestMapping</span>(value = <span class="string">"/beanLogin"</span>,method = RequestMethod.POST)</span><br><span class="line">   <span class="function"><span class="keyword">public</span> String <span class="title">beanLogin</span><span class="params">(UserEntity userEntity)</span></span>&#123;</span><br><span class="line">       System.out.println(userEntity);</span><br><span class="line">       <span class="keyword">if</span>(userEntity.getUserName().equals(<span class="string">"surine"</span>))&#123;</span><br><span class="line">           <span class="keyword">return</span> <span class="string">"找不到surine"</span>;</span><br><span class="line">       &#125;<span class="keyword">else</span> &#123;</span><br><span class="line">           <span class="keyword">return</span> <span class="string">"登录成功"</span>;</span><br><span class="line">       &#125;</span><br><span class="line">   &#125;</span><br></pre></td></tr></table></figure>
+<p>前面的文章，包括本文章介绍了两种类型的get/post请求，还有一些别的写法就不多说了，目前这两种够我们用了，下面我们说一下返回json</p>
+<h2 id="3-返回Json"><a href="#3-返回Json" class="headerlink" title="3.返回Json"></a>3.返回Json</h2><p>网络通信一般使用Json或者Xml来交换数据，而最常用的还是Json，Json是什么？Json长什么样？PS：自行补课     <a href="/SpringBoot/2.快速入门/0.技术补充.html">本部分技术补充</a></p>
+<p>补完之后我们继续添加一个接口</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 复读机？</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@param</span> userEntity user对象</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@return</span>  UserEntity user对象                 </span></span><br><span class="line"><span class="comment">     * */</span></span><br><span class="line">    <span class="meta">@RequestMapping</span>(value = <span class="string">"/returnJson"</span>)</span><br><span class="line">    <span class="function"><span class="keyword">public</span> UserEntity <span class="title">returnJson</span><span class="params">(UserEntity userEntity)</span></span>&#123;</span><br><span class="line">        System.out.println(userEntity);</span><br><span class="line">        <span class="keyword">return</span> userEntity;</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+<p>我把他叫做复读机接口，它可以传入user对象，然后返回同样的user对象，但是到前端之后就不能叫user对象了，得叫他json……</p>
+<p>点击项目重新运行，浏览器</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">http://localhost:8080/returnJson?userName=surine&amp;passWord=123</span><br></pre></td></tr></table></figure>
+<p>嗯，下面这货这就是Json</p>
+<p><img src="assets/1547712870748.png" alt="1547712870748"></p>
+<p>对应字段和值，前端通过解析这段字符串就可以显示相应的界面，不过别着急，界面什么的都是浮云，真正的后端开发才不管什么界面不界面的。</p>
+<p>有了正确的json就是胜利。</p>
+<h2 id="4-续"><a href="#4-续" class="headerlink" title="4.续"></a>4.续</h2><p>好像还差点啥啊？</p>
+<p>差点啥？</p>
+<p>Post返回Json还没写，国际惯例，小练习，需求如下</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">需求：前端Post发送UserEntity对象</span><br><span class="line">     后端接受之后把两个字段交换过来，如userName = surine passWord = 123 处理为 userName = 123 passWord = surine</span><br><span class="line">     其实就是一个get/set的过程</span><br></pre></td></tr></table></figure>
+<p>然后先自己实现把，结果可以自行判断是否正确</p>
+<p>最后，我的实现如下：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@RequestMapping</span>(value = <span class="string">"/function"</span>)</span><br><span class="line">    <span class="function"><span class="keyword">public</span> UserEntity <span class="title">function</span><span class="params">(UserEntity userEntity)</span></span>&#123;</span><br><span class="line">        String name = userEntity.getUserName();</span><br><span class="line">        String pswd = userEntity.getPassWord();</span><br><span class="line">        <span class="comment">//交换</span></span><br><span class="line">        userEntity.setPassWord(name);</span><br><span class="line">        userEntity.setUserName(pswd);</span><br><span class="line">        <span class="keyword">return</span> userEntity;</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+<p>有了基础请求，相信你已经更加熟悉SpringBoot了，下面我们学习持久化部分，当掌握了持久化，你就可以直接进行项目实战了。</p>
+<h1 id="点我回到目录"><a href="#点我回到目录" class="headerlink" title="点我回到目录"></a><a href="/SpringBoot/">点我回到目录</a></h1>
+        
+      </div>
+      
+      
+      
+    </div>
+    
+    
+    
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name">Surine</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">2</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">2</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">3</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="https://github.com/surine" target="_blank" title="GitHub">
+                      
+                        <i class="fa fa-fw fa-github"></i>GitHub</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="mailto:surinx@163.com" target="_blank" title="E-Mail">
+                      
+                        <i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#3-基础请求实现"><span class="nav-number">1.</span> <span class="nav-text">3.基础请求实现</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#准备"><span class="nav-number">1.1.</span> <span class="nav-text">准备</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#1-Get请求"><span class="nav-number">1.2.</span> <span class="nav-text">1. Get请求</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-Post请求"><span class="nav-number">1.3.</span> <span class="nav-text">2. Post请求</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-Bean映射"><span class="nav-number">1.4.</span> <span class="nav-text">3. Bean映射</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-返回Json"><span class="nav-number">1.5.</span> <span class="nav-text">3.返回Json</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4-续"><span class="nav-number">1.6.</span> <span class="nav-text">4.续</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#点我回到目录"><span class="nav-number">2.</span> <span class="nav-text">点我回到目录</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-github"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Surine</span>
+
+  
+</div>
+
+
+
+
+
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
