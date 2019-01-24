@@ -79,25 +79,25 @@
 
 
 
-<meta name="description" content="拿农药这个话题蹭波热度。当然在此前简书德维恩魏：https://www.jianshu.com/p/61c5cdc5b791已经写过这种文章了，这里注明一下，文章中所设计的代码可能相似，大家觉得我表述的不专业的话可以参考前辈代码。   其他参考：https://www.cnblogs.com/zhanglei93/p/6081019.html   #一. 游戏背景为了避免直接进入代码的不适应，我">
+<meta name="description" content="拿农药这个话题蹭波热度。当然在此前简书德维恩魏已经写过这种文章了，这里注明一下，文章中所设计的代码可能相似，大家觉得我表述的不专业的话可以参考前辈代码。   其他参考：https://www.cnblogs.com/zhanglei93/p/6081019.html   #一. 游戏背景为了避免直接进入代码的不适应，我们先聊点轻松的。王者荣耀是一款5v5公平对战手游（1v9公平对战手游……），自">
 <meta name="keywords" content="设计模式">
 <meta property="og:type" content="article">
 <meta property="og:title" content="用王者荣耀分析&lt;策略模式&gt;">
 <meta property="og:url" content="https://surine.cn/2019/01/24/用王者荣耀分析策略模式/index.html">
 <meta property="og:site_name" content="苏·凌">
-<meta property="og:description" content="拿农药这个话题蹭波热度。当然在此前简书德维恩魏：https://www.jianshu.com/p/61c5cdc5b791已经写过这种文章了，这里注明一下，文章中所设计的代码可能相似，大家觉得我表述的不专业的话可以参考前辈代码。   其他参考：https://www.cnblogs.com/zhanglei93/p/6081019.html   #一. 游戏背景为了避免直接进入代码的不适应，我">
+<meta property="og:description" content="拿农药这个话题蹭波热度。当然在此前简书德维恩魏已经写过这种文章了，这里注明一下，文章中所设计的代码可能相似，大家觉得我表述的不专业的话可以参考前辈代码。   其他参考：https://www.cnblogs.com/zhanglei93/p/6081019.html   #一. 游戏背景为了避免直接进入代码的不适应，我们先聊点轻松的。王者荣耀是一款5v5公平对战手游（1v9公平对战手游……），自">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:image" content="https://surine.cn/2019/01/24/用王者荣耀分析策略模式/assets/2441545-2f60d3efbc9185b7.png">
-<meta property="og:image" content="https://surine.cn/2019/01/24/用王者荣耀分析策略模式/assets/2441545-55f4fafcd9c89299.png">
-<meta property="og:image" content="https://surine.cn/2019/01/24/用王者荣耀分析策略模式/assets/2441545-fec218c32b88eb9b.png">
-<meta property="og:image" content="https://surine.cn/2019/01/24/用王者荣耀分析策略模式/assets/2441545-5a230b1ff8c064ed.png">
-<meta property="og:image" content="https://surine.cn/2019/01/24/用王者荣耀分析策略模式/assets/2441545-e82928c3914273b6.png">
-<meta property="og:image" content="https://surine.cn/2019/01/24/用王者荣耀分析策略模式/assets/2441545-3e8e29062f5558f8.png">
-<meta property="og:updated_time" content="2019-01-24T07:37:20.482Z">
+<meta property="og:image" content="https://upload-images.jianshu.io/upload_images/2441545-2f60d3efbc9185b7.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="https://upload-images.jianshu.io/upload_images/2441545-55f4fafcd9c89299.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="https://upload-images.jianshu.io/upload_images/2441545-fec218c32b88eb9b.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="https://upload-images.jianshu.io/upload_images/2441545-5a230b1ff8c064ed.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="https://upload-images.jianshu.io/upload_images/2441545-e82928c3914273b6.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="https://upload-images.jianshu.io/upload_images/2441545-3e8e29062f5558f8.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:updated_time" content="2019-01-24T07:53:45.700Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="用王者荣耀分析&lt;策略模式&gt;">
-<meta name="twitter:description" content="拿农药这个话题蹭波热度。当然在此前简书德维恩魏：https://www.jianshu.com/p/61c5cdc5b791已经写过这种文章了，这里注明一下，文章中所设计的代码可能相似，大家觉得我表述的不专业的话可以参考前辈代码。   其他参考：https://www.cnblogs.com/zhanglei93/p/6081019.html   #一. 游戏背景为了避免直接进入代码的不适应，我">
-<meta name="twitter:image" content="https://surine.cn/2019/01/24/用王者荣耀分析策略模式/assets/2441545-2f60d3efbc9185b7.png">
+<meta name="twitter:description" content="拿农药这个话题蹭波热度。当然在此前简书德维恩魏已经写过这种文章了，这里注明一下，文章中所设计的代码可能相似，大家觉得我表述的不专业的话可以参考前辈代码。   其他参考：https://www.cnblogs.com/zhanglei93/p/6081019.html   #一. 游戏背景为了避免直接进入代码的不适应，我们先聊点轻松的。王者荣耀是一款5v5公平对战手游（1v9公平对战手游……），自">
+<meta name="twitter:image" content="https://upload-images.jianshu.io/upload_images/2441545-2f60d3efbc9185b7.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
 
 
 
@@ -390,12 +390,12 @@
 
       
         <blockquote>
-<p>拿农药这个话题蹭波热度。<br>当然在此前简书<a href="https://www.jianshu.com/u/76a6e8741afd" target="_blank" rel="noopener">德维恩魏</a>：<a href="https://www.jianshu.com/p/61c5cdc5b791已经写过这种文章了，这里注明一下，文章中所设计的代码可能相似，大家觉得我表述的不专业的话可以参考前辈代码。" target="_blank" rel="noopener">https://www.jianshu.com/p/61c5cdc5b791已经写过这种文章了，这里注明一下，文章中所设计的代码可能相似，大家觉得我表述的不专业的话可以参考前辈代码。</a></p>
+<p>拿农药这个话题蹭波热度。<br>当然在此前简书<a href="https://www.jianshu.com/u/76a6e8741afd" target="_blank" rel="noopener">德维恩魏</a>已经写过这种文章了，这里注明一下，文章中所设计的代码可能相似，大家觉得我表述的不专业的话可以参考前辈代码。</p>
 </blockquote>
 <blockquote>
 <p>其他参考：<a href="https://www.cnblogs.com/zhanglei93/p/6081019.html" target="_blank" rel="noopener">https://www.cnblogs.com/zhanglei93/p/6081019.html</a></p>
 </blockquote>
-<p><img src="assets/2441545-2f60d3efbc9185b7.png" alt="王者农药"></p>
+<p><img src="https://upload-images.jianshu.io/upload_images/2441545-2f60d3efbc9185b7.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="王者农药"></p>
 <p>#一. 游戏背景<br>为了避免直接进入代码的不适应，我们先聊点轻松的。<br>王者荣耀是一款5v5公平对战手游（1v9公平对战手游……），自诞生以来很受欢迎，成为主流moba游戏，我也是女票带入坑的，从此一发不可收拾。<br>当然游戏要适度，代码还是要写的。</p>
 <p>首先我们了解一下大概的游戏的一些规则。<br>所有英雄分为几种不同的职业，当然各职业也有自己不同的特点，比如射手（ADC）射程远，伤害高，但是很脆容易死等。<br>每个英雄有3-4个技能，还有一个普通攻击。<br>同时在游戏中有一个召唤师技能，在出场时你可以选择适合自己的召唤师技能。</p>
 <p>#二.面向对象设计<br>背景就说这么多，我们试着用面向对象的方法来考虑如何设计英雄。</p>
@@ -420,7 +420,7 @@
 <p>咦？什么情况。<br>发现子类实体没有关于召唤师技能的相关代码。<br>同样的我们看后羿，<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">/**</span><br><span class="line"> * 后羿</span><br><span class="line"> * */</span><br><span class="line">public class Hy extends Shooter&#123;</span><br><span class="line">    public Hy() &#123;</span><br><span class="line">        System.out.println(&quot;我是后羿&quot;);</span><br><span class="line">    &#125;</span><br><span class="line">    public void A()&#123;</span><br><span class="line">        System.out.println(&quot;后羿普通攻击&quot;);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
 <p>也是没有。<br>最后我们看一下Main方法的调用<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">public class Main &#123;</span><br><span class="line">    public static void main(String[] args) &#123;</span><br><span class="line">        Shooter houYi = new Hy();</span><br><span class="line">        //后羿带了闪现技能</span><br><span class="line">        houYi.setSkillBehavior(new Sx());</span><br><span class="line"></span><br><span class="line">        Shooter gongSunli = new Ali();</span><br><span class="line">        //公孙离带了惩戒</span><br><span class="line">        gongSunli.setSkillBehavior(new Cj());</span><br><span class="line"></span><br><span class="line">        //后羿释放了技能</span><br><span class="line">        houYi.performSkill();</span><br><span class="line">        //公孙离释放了技能</span><br><span class="line">        gongSunli.performSkill();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
 <p>通过setSkillBehavior设置召唤师技能，然后通过performSkill()使用技能。</p>
-<p>然后突然我们就会意识到，召唤师技能是作为模块配置给英雄的。<br><img src="assets/2441545-55f4fafcd9c89299.png" alt="运行结果"></p>
+<p>然后突然我们就会意识到，召唤师技能是作为模块配置给英雄的。<br><img src="https://upload-images.jianshu.io/upload_images/2441545-55f4fafcd9c89299.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="运行结果"></p>
 <p>#四.策略模式</p>
 <blockquote>
 <p>策略模式是行为型模式</p>
@@ -431,7 +431,7 @@
 </blockquote>
 <p>看这个句子可能晦涩难懂，但是结合我们的王者示例就可以很容易的理解，定义了一些召唤师技能，他们可以独立于使用他们的召唤师，一旦发生修改只需要修改它自身，而不需要修改召唤师。</p>
 <p>###2.策略<br>上面我们已经大致了解了策略模式的概念，那么为什么叫策略呢？<br><strong>何为策略？</strong><br>我们平时所说的策略，更多指办事的不同方法或集合</p>
-<p><img src="assets/2441545-fec218c32b88eb9b.png" alt="策略.png"></p>
+<p><img src="https://upload-images.jianshu.io/upload_images/2441545-fec218c32b88eb9b.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="策略.png"></p>
 <p> 比如说商场促销，同样是优惠，我们可以有不同的方式，比如满减，比如优惠券，比如买一赠一，这都是属于优惠。</p>
 <p>那么策略在这个小栗子中的含义就是商场为了<strong>促销</strong>而实施的一系列<strong>措施</strong>。</p>
 <p>我们把这些策略独立出来，让他们不仅能用于衣服商城，而且能够用于家电商城。这样就实现了复用，大大节省代码量并且易于后期维护。</p>
@@ -439,7 +439,7 @@
 <p>能想到的最简单的方法当然是if/else，如果满足什么条件实施买一赠一，如果满足什么条件发放优惠券，这是最low的一种方式，大家在代码中应该避免。</p>
 </blockquote>
 <p>对于王者荣耀问题，使用策略模式其实是不太通顺的，这里仅仅是为了蹭热度才选择王者荣耀的。（希望不要被喷……）</p>
-<p>###3.角色<br><img src="assets/2441545-5a230b1ff8c064ed.png" alt="策略模式图"></p>
+<p>###3.角色<br><img src="https://upload-images.jianshu.io/upload_images/2441545-5a230b1ff8c064ed.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="策略模式图"></p>
 <ul>
 <li>Context 上下文角色,或者是策略的使用者。对应王者荣耀示例的阿离，后羿等英雄（策略的使用者）类。</li>
 <li>Istrategy 算法族抽象类，是一个包含抽象动作的接口，对应王者荣耀示例策略的SkillBehavior 抽象</li>
@@ -461,9 +461,9 @@
 <p>###2.多用组合，少用继承</p>
 <p>###3.找出应用中可能变化的地方，把他们独立出来，不要和那些不需要变化的代码混在一起。</p>
 <p>#六.补充<br>作为一个Android爱好者，这里补充一下Android里用的策略模式。<br>Android中也有好多地方用到策略模式，这里我们说最熟悉的ListAdapter<br>作为Listview的适配器，ListAdapter连接了View与Model，作为桥的功能实现了列表。</p>
-<p>问题来了，我们平时如何使用ListView的Adapter？<br>很简单，做过Android的都知道<strong>setAdaper()</strong>方法<br>那我们打开setAdapter()的方法<br><img src="assets/2441545-e82928c3914273b6.png" alt="Android源码"></p>
+<p>问题来了，我们平时如何使用ListView的Adapter？<br>很简单，做过Android的都知道<strong>setAdaper()</strong>方法<br>那我们打开setAdapter()的方法<br><img src="https://upload-images.jianshu.io/upload_images/2441545-e82928c3914273b6.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="Android源码"></p>
 <p>我们看到setAdapter(),接受一个ListAdapter对象，那么我们深入一下，看看ListAdapter实现。</p>
-<p><img src="assets/2441545-3e8e29062f5558f8.png" alt="Android源码"></p>
+<p><img src="https://upload-images.jianshu.io/upload_images/2441545-3e8e29062f5558f8.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="Android源码"></p>
 <p>可以看到ListAdapter是一个抽象，下面的代码没有截图，是两个抽象函数。</p>
 <p>那么这样你就能够看到，这个ListAdapter就是算法族抽象，你自定义的Adapter或者系统内置的Adapter都是需要抽象自ListAdapter。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">public abstract class BaseAdapter implements ListAdapter, SpinnerAdapter &#123;</span><br><span class="line">   ……</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
 <p>这些Adapter就是策略，那么setAdapter就是配置策略，ListView就是客户。</p>
