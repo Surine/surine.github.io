@@ -86,15 +86,15 @@
 <meta property="og:site_name" content="苏·凌">
 <meta property="og:description" content="自定义属性及加载经历了一个快速入门的环节，相信你已经大致了解了一些的基础内容，接下来我们将体验一些比较枯燥的内容。 本片内容叫做自定义属性及加载， 前面我们用到一个application.properties的配置文件，包括数据库的一些信息，我们都是在这里面配置的。 我们在这个文件里面添加这样几行代码。（我用的依然是2-5实战里的moment_demo） 1234#自定义属性cn.surine.m">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:image" content="https://surine.cn/SpringBoot/3.配置及属性/%7BfileName%7D/1548767275593.png">
-<meta property="og:image" content="https://surine.cn/SpringBoot/3.配置及属性/%7BfileName%7D/1548767874216.png">
-<meta property="og:image" content="https://surine.cn/SpringBoot/3.配置及属性/%7BfileName%7D/1548768793664.png">
-<meta property="og:image" content="https://surine.cn/SpringBoot/3.配置及属性/%7BfileName%7D/1548768310819.png">
-<meta property="og:updated_time" content="2019-01-29T13:43:32.352Z">
+<meta property="og:image" content="https://surine.cn/SpringBoot/3.配置及属性/assets/1548767275593.png">
+<meta property="og:image" content="https://surine.cn/SpringBoot/3.配置及属性/assets/1548767874216.png">
+<meta property="og:image" content="https://surine.cn/SpringBoot/3.配置及属性/assets/1548768793664.png">
+<meta property="og:image" content="https://surine.cn/SpringBoot/3.配置及属性/assets/1548768310819.png">
+<meta property="og:updated_time" content="2019-01-29T14:31:56.402Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="苏·凌">
 <meta name="twitter:description" content="自定义属性及加载经历了一个快速入门的环节，相信你已经大致了解了一些的基础内容，接下来我们将体验一些比较枯燥的内容。 本片内容叫做自定义属性及加载， 前面我们用到一个application.properties的配置文件，包括数据库的一些信息，我们都是在这里面配置的。 我们在这个文件里面添加这样几行代码。（我用的依然是2-5实战里的moment_demo） 1234#自定义属性cn.surine.m">
-<meta name="twitter:image" content="https://surine.cn/SpringBoot/3.配置及属性/%7BfileName%7D/1548767275593.png">
+<meta name="twitter:image" content="https://surine.cn/SpringBoot/3.配置及属性/assets/1548767275593.png">
 
 
 
@@ -319,7 +319,7 @@
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Autowired</span></span><br><span class="line">    <span class="keyword">private</span> PeopleEntity peopleEntity;</span><br><span class="line">    <span class="meta">@RequestMapping</span>(value = <span class="string">"/getProperties"</span>)</span><br><span class="line">    <span class="function"><span class="keyword">public</span> String <span class="title">getProperties</span><span class="params">()</span></span>&#123;</span><br><span class="line">        <span class="keyword">return</span> peopleEntity.getName()+peopleEntity.getAge()+peopleEntity.getOther();</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
 <p>首先前两行，自动注入，很熟悉了，可以直接导入你要用的类。</p>
 <p>下面的，也很熟悉，访问路径配置，然后方法体内部写返回的内容，是把我刚才定义的几个属性返回去了。</p>
-<p><img src="{fileName}/1548767275593.png" alt="1548767275593"></p>
+<p><img src="assets/1548767275593.png" alt="1548767275593"></p>
 <p>可以看到我访问对应路径已经出现效果了。说明我们的属性配置和访问没有问题</p>
 <h3 id="进一步探索"><a href="#进一步探索" class="headerlink" title="进一步探索"></a>进一步探索</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@RequestMapping</span>(value = <span class="string">"/getRandom"</span>)</span><br><span class="line">    <span class="function"><span class="keyword">public</span> String <span class="title">getRandom</span><span class="params">()</span></span>&#123;</span><br><span class="line">        <span class="keyword">return</span> peopleEntity.getString();</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
 <p>我在Controller里面添加了这些内容，当然刚才我们已经注入了PeopleEntity，所以不需要再注入了。</p>
@@ -332,7 +332,7 @@
 <p>同样类似的属性还有</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"># 随机int</span><br><span class="line">cn.surine.moment.<span class="keyword">int</span>=$&#123;random.<span class="keyword">int</span>&#125;</span><br><span class="line"># 随机long</span><br><span class="line">cn.surine.moment.<span class="keyword">long</span>=$&#123;random.<span class="keyword">long</span>&#125;</span><br><span class="line"># 10以内的随机数</span><br><span class="line">cn.surine.moment._10=$&#123;random.<span class="keyword">int</span>(<span class="number">10</span>)&#125;</span><br><span class="line"># 10-20的随机数</span><br><span class="line">cn.surine.moment._10_20=$&#123;random.<span class="keyword">int</span>[<span class="number">10</span>,<span class="number">20</span>]&#125;</span><br></pre></td></tr></table></figure>
 <p>我们来看看效果。</p>
-<p><img src="{fileName}/1548767874216.png" alt="1548767874216"></p>
+<p><img src="assets/1548767874216.png" alt="1548767874216"></p>
 <h3 id="继续探索"><a href="#继续探索" class="headerlink" title="继续探索"></a>继续探索</h3><p>我们首先在pom中导入一个依赖，然后才能用接下来的方法来实现配置。</p>
 <figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">			<span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.springframework.boot<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">			<span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>spring-boot-configuration-processor<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">			<span class="tag">&lt;<span class="name">optional</span>&gt;</span>true<span class="tag">&lt;/<span class="name">optional</span>&gt;</span></span><br><span class="line">		<span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br></pre></td></tr></table></figure>
 <p>在属性文件中，添加：</p>
@@ -343,13 +343,13 @@
 <p>接下来，我们给MomentDemoApplication中添加一句</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@EnableConfigurationProperties</span>(WebConfig.class)</span><br></pre></td></tr></table></figure>
 <p>把对应的类配置进去</p>
-<p><img src="{fileName}/1548768793664.png" alt="1548768793664"></p>
+<p><img src="assets/1548768793664.png" alt="1548768793664"></p>
 <p>最后Controller里面的内容就写</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Autowired</span></span><br><span class="line">   <span class="keyword">private</span> WebConfig webConfig;</span><br><span class="line">   <span class="meta">@RequestMapping</span>(value = <span class="string">"/getWebConfig"</span>)</span><br><span class="line">   <span class="function"><span class="keyword">public</span> WebConfig <span class="title">getWebConfig</span><span class="params">()</span></span>&#123;</span><br><span class="line">       <span class="keyword">return</span> webConfig;</span><br><span class="line">   &#125;</span><br></pre></td></tr></table></figure>
 <p>照例注入。</p>
 <p>返回WebConfig对象。</p>
 <p>测试结果如下。</p>
-<p><img src="{fileName}/1548768310819.png" alt="1548768310819"></p>
+<p><img src="assets/1548768310819.png" alt="1548768310819"></p>
 <p>对于自定义属性及配置可以将属性抽离，而且对于正式开发，属性不同的情况下比较方便修改。后面会有不同属性文件的介绍。</p>
 <h1 id="点我回到目录"><a href="#点我回到目录" class="headerlink" title="点我回到目录"></a><a href="/SpringBoot/">点我回到目录</a></h1>
         
