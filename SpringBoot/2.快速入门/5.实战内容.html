@@ -394,7 +394,7 @@
 </table>
 <p>数据表就算设计完成了，下面我们新建一个项目。</p>
 <h2 id="2-新建项目"><a href="#2-新建项目" class="headerlink" title="2. 新建项目"></a>2. 新建项目</h2><p>新建一个项目，然后在目录下建立如下文件。</p>
-<p><img src="assets/1547949436448.png" alt="1547949436448"></p>
+<p><img src="/SpringBoot/2.快速入门/assets/1547949436448.png" alt="1547949436448"></p>
 <p>可以看到，我们建立了几个包，Controller，Entities，Mapper，Service，这里你没见过的就是Service，这里是为了逻辑分而建立的，我们把Controller里的逻辑移到Service里面写的，一会就可以看到这样写的好处。</p>
 <p>然后分别在包下添加对应文件。</p>
 <p>接下来我们导入mysql和mybatis的依赖，前面提到过就不再啰嗦了。</p>
@@ -436,14 +436,14 @@
 <p>text = 撑死了，uid = 4</p>
 <p>测试结果 如下(数据库里最后一条)</p>
 </blockquote>
-<p><img src="assets/1547978763297.png" alt="1547978763297"></p>
-<p><img src="assets/1547978894632.png" alt="1547978894632"></p>
+<p><img src="/SpringBoot/2.快速入门/assets/1547978763297.png" alt="1547978763297"></p>
+<p><img src="/SpringBoot/2.快速入门/assets/1547978894632.png" alt="1547978894632"></p>
 <blockquote>
 <p>测试内容：localhost:8080/moment/sendMoment</p>
 <p>text = “”    uid = 4</p>
 <p>测试结果如下，可以看到参数为空的提示</p>
 </blockquote>
-<p><img src="assets/1547978971211.png" alt="1547978971211"></p>
+<p><img src="/SpringBoot/2.快速入门/assets/1547978971211.png" alt="1547978971211"></p>
 <h2 id="5-删除动态"><a href="#5-删除动态" class="headerlink" title="5.删除动态"></a>5.删除动态</h2><p>下面我们实现按照id来删除动态。</p>
 <p>Mapper内添加：</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 删除动态</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@param</span> momentEntity 动态实体</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@return</span> 操作状态</span></span><br><span class="line"><span class="comment">     * 删除数据库内id = ？ and user_id = ? 的数据</span></span><br><span class="line"><span class="comment">     * */</span></span><br><span class="line">    <span class="meta">@Delete</span>(<span class="string">"DELETE from moment where id = #&#123;id&#125; AND user_id = #&#123;userId&#125;"</span>)</span><br><span class="line">    <span class="function"><span class="keyword">int</span> <span class="title">delete</span><span class="params">(MomentEntity momentEntity)</span></span>;</span><br></pre></td></tr></table></figure>
@@ -457,14 +457,14 @@
 <p>localhost:8080/moment/deleteMoment?id=2&amp;uid=1</p>
 <p>返回结果如下，数据库如下</p>
 </blockquote>
-<p><img src="assets/1547980104675.png" alt="1547980104675"></p>
-<p><img src="assets/1547980144338.png" alt="1547980144338"></p>
+<p><img src="/SpringBoot/2.快速入门/assets/1547980104675.png" alt="1547980104675"></p>
+<p><img src="/SpringBoot/2.快速入门/assets/1547980144338.png" alt="1547980144338"></p>
 <p>我们可以对比之前的数据内容，id=2 ，uid = 1 的内容被我们删除了。</p>
 <p>我们再来看看没有此条数据是什么情况：</p>
 <blockquote>
 <p>localhost:8080/moment/deleteMoment?id=4&amp;uid=1</p>
 </blockquote>
-<p><img src="assets/1547980233659.png" alt="1547980233659"></p>
+<p><img src="/SpringBoot/2.快速入门/assets/1547980233659.png" alt="1547980233659"></p>
 <p>我们在实际开发中，所考虑的不能是这么简单，还需要用户验证之类的，但是至少要保证，要删除的id 和uid对应能找到这么一条数据，否则就出问题了（但几乎是没啥问题，以防万一而已）</p>
 <h2 id="6-修改动态"><a href="#6-修改动态" class="headerlink" title="6.修改动态"></a>6.修改动态</h2><p>我们按id，uid来匹配动态，并且传入修改的内容。</p>
 <p>Mapper内添加：</p>
@@ -479,12 +479,12 @@
 <p>id = 6 uid =4  text = 我没吃饱怎么办</p>
 <p>操作结果与数据库如下</p>
 </blockquote>
-<p><img src="assets/1547981034775.png" alt="1547981034775"></p>
-<p><img src="assets/1547981088651.png" alt="1547981088651"></p>
+<p><img src="/SpringBoot/2.快速入门/assets/1547981034775.png" alt="1547981034775"></p>
+<p><img src="/SpringBoot/2.快速入门/assets/1547981088651.png" alt="1547981088651"></p>
 <p>测试内容2</p>
-<p><img src="assets/1547981128506.png" alt="1547981128506"></p>
+<p><img src="/SpringBoot/2.快速入门/assets/1547981128506.png" alt="1547981128506"></p>
 <p>测试内容3</p>
-<p><img src="assets/1547981162405.png" alt="1547981162405"></p>
+<p><img src="/SpringBoot/2.快速入门/assets/1547981162405.png" alt="1547981162405"></p>
 <p>我很想解释一波，但是并木有什么可以解释的。</p>
 <p>下面我们就来实现最后一个吧—–查询</p>
 <h2 id="7-查询"><a href="#7-查询" class="headerlink" title="7.查询"></a>7.查询</h2><p>国际惯例 按id查询，和全列表查询</p>
@@ -500,9 +500,9 @@
 <p>localhost:8080/moment/getOneMoment?id = 5 &amp; uid = 3</p>
 <p>测试结果如下，返回数据库相应数据，这里截图中是post方法，我的接口写的是get方法，其实不要被它迷惑了，postman的强大甚至可以给你自行改post为get ，哈哈哈哈…… 都一样，喜欢什么用什么即可。</p>
 </blockquote>
-<p><img src="assets/1547981677784.png" alt="1547981677784"></p>
+<p><img src="/SpringBoot/2.快速入门/assets/1547981677784.png" alt="1547981677784"></p>
 <p>另一种结果：</p>
-<p><img src="assets/1547981823867.png" alt="1547981823867"></p>
+<p><img src="/SpringBoot/2.快速入门/assets/1547981823867.png" alt="1547981823867"></p>
 <p>这样你就实现了，按照id来查询动态的功能。</p>
 <p>查询所有数据写法如下</p>
 <p>Mapper:</p>
@@ -513,7 +513,7 @@
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment">    * 查询所有数据</span></span><br><span class="line"><span class="comment">    * <span class="doctag">@return</span> JsonUtil</span></span><br><span class="line"><span class="comment">    * */</span></span><br><span class="line">   <span class="function"><span class="keyword">public</span> JsonUtil <span class="title">getMoments</span><span class="params">()</span></span>&#123;</span><br><span class="line">       List&lt;MomentEntity&gt; momentEntityList = momentMapper.selectAll();</span><br><span class="line">       <span class="comment">//状态</span></span><br><span class="line">       <span class="keyword">if</span>(momentEntityList != <span class="keyword">null</span>)&#123;</span><br><span class="line">           json.setOk(momentEntityList);</span><br><span class="line">       &#125;<span class="keyword">else</span>&#123;</span><br><span class="line">           json.setFail(<span class="keyword">null</span>);</span><br><span class="line">       &#125;</span><br><span class="line">       <span class="keyword">return</span> json;</span><br><span class="line">   &#125;</span><br></pre></td></tr></table></figure>
 <p>将momentEntityList传入返回对象中，即可返回给前端。</p>
 <p>测试：请求地址：<strong>localhost:8080/moment/getMoments</strong>及测试结果</p>
-<p><img src="assets/1547986236848.png" alt="1547986236848"></p>
+<p><img src="/SpringBoot/2.快速入门/assets/1547986236848.png" alt="1547986236848"></p>
 <p>额，这个实战写了好久好久……终于写完了。</p>
 <p>不知道有没有什么错误，如果有问题或者疑问，还请小可爱们指出哦，核心源代码我会上传的。</p>
 <h2 id="8-总结"><a href="#8-总结" class="headerlink" title="8.总结"></a>8.总结</h2><p>可能你做完这个觉得还是不爽，没有看到界面，只看到一堆乱七八糟的数据符号，根本就没有微信朋友圈的效果，不过我可以明确的告诉你，做APP后端，看到这些数据就已经OK了。</p>

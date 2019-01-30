@@ -311,11 +311,11 @@
 <p>创建项目有两种方法，一种是访问spring官网进行工程下载，但是毕竟是麻烦的，这里就不说了。</p>
 <p>我们要提的就是用Idea自动建立项目来做。</p>
 <h2 id="一-创建Hello-World"><a href="#一-创建Hello-World" class="headerlink" title="一. 创建Hello World"></a>一. 创建Hello World</h2><p>打开Idea，新建一个项目（File  -&gt; New -&gt; Project）</p>
-<p><img src="assets/download.png" alt="新建工程"></p>
+<p><img src="/SpringBoot/2.快速入门/assets/download.png" alt="新建工程"></p>
 <p>我们可以看到，我们现在选择的是Spring Initializr，界面上显示Choose Initializr Service URL，也就是初始化连接，</p>
 <p>我们看到默认是spring.io的链接，这个我们不用动，因为Idea在背后已经帮我们去下载了项目包。</p>
 <p>我们点击Next。</p>
-<p>​            <img src="assets/草图.png" alt="草图"></p>
+<p>​            <img src="/SpringBoot/2.快速入门/assets/草图.png" alt="草图"></p>
 <p>我们挨个来看，每一个都是什么意思，当然 这些都可以默认，你完全可以不用管这些内容，或者你可以粗略的看看下面这部分内容。</p>
 <ul>
 <li><em>Group：</em> 公司域名倒置，没域名的宝宝可以随便写了，你可以自己编一个，我的域名是surine.cn,所以我就会写cn.surine,这个名字会被当作包名的前一部分，我们可以在最下面一行Package看到。 至于为什么要填这个，主要是为了区分项目包名，因为域名是唯一的，可以当作唯一标识</li>
@@ -329,22 +329,22 @@
 <li>剩下两个，不说了 （是不是有点逼死强迫症啊……）</li>
 </ul>
 <p>下一步。​</p>
-<p><img src="assets/1547554074564.png" alt="1547554074564"></p>
+<p><img src="/SpringBoot/2.快速入门/assets/1547554074564.png" alt="1547554074564"></p>
 <p>这里是一些依赖，我们可以在默认建立时候就选上自己需要的，我一般会选Web里的Web选项，系统会帮我们自动配置一些东西，省的我们一会还要重新配置。</p>
 <p>选择项目储存位置的地方自己选即可。</p>
 <p>选择next就可以建立新项目了（弹窗提醒新窗口显示项目或者当前窗口，根据你自己的需求选择即可）</p>
-<p><img src="assets/1547554279828.png" alt="1547554279828"></p>
+<p><img src="/SpringBoot/2.快速入门/assets/1547554279828.png" alt="1547554279828"></p>
 <p>新项目的结构我们可以看图，这里我也不多做介绍了，因为有些文件夹，或者文件，我们碰都不会碰一下，所以我们干脆不说。我们下面只说src（项目主目录），pom.xml (依赖库管理文件)，我们暂时只用这两个，其他的，我们遇到再看。</p>
 <p><em>另外温馨提示一下：尽量要等IDE底部的进度条结束之后再进行下一步操作，防止出现一些各种各样的问题，当然用过Idea系列IDE的童鞋也知道，下载或者编译都是个非常耗时的工作，所以不如趁他下载的时候去刷刷段子啥的。</em></p>
 <h2 id="二-启动项目"><a href="#二-启动项目" class="headerlink" title="二. 启动项目"></a>二. 启动项目</h2><p>在启动项目之前，我们先看一下src下面的组织</p>
-<p><img src="assets/1547639062217.png" alt="1547639062217"></p>
+<p><img src="/SpringBoot/2.快速入门/assets/1547639062217.png" alt="1547639062217"></p>
 <p>src下分为main和test两个目录，其中main目录下面是工程核心部分，test是用于测试的部分。</p>
 <p>main中主要是java部分和resources部分，其中前者是后端核心部分，后者是前端核心部分，比如说我们的前端js或者图片文件放在static中，模板文件放在templates中，对于属性配置系列，我们可以放在application.properties中。</p>
 <p>文件结构就先介绍到这，我们现在正式启动项目，我们先看xxxxxApplication这个文件。</p>
-<p><img src="assets/1547639823870.png" alt="1547639823870"></p>
+<p><img src="/SpringBoot/2.快速入门/assets/1547639823870.png" alt="1547639823870"></p>
 <p><strong>Application是Spring Boot框架中描述Spring应用的类</strong>，它的run()方法会创建一个Spring应用上下文（Application Context）。<br>此外它会扫描当前应用类路径上的依赖，来判断这是一个什么样类型的应用，比如说现在我们建立的Web应用，那么SpringBoot知道之后，<strong>将会启动一个内嵌的Servlet容器（默认是Tomcat）用于处理HTTP请求</strong>。</p>
 <p>我们点击main方法前面对应的绿色的箭头即可运行。如果看到最后一行提示项目启动成功就证明启动成功了，不过现在我们看不到任何效果，因为我们什么都没写，我们有的，也仅仅是Application这个类，这个类里有一个main方法，控制着整个项目的启动过程。</p>
-<p><img src="assets/1547640460602.png" alt="1547640460602"></p>
+<p><img src="/SpringBoot/2.快速入门/assets/1547640460602.png" alt="1547640460602"></p>
 <p>下面我们写一个Hello World。</p>
 <h2 id="三-编写第一个Controller"><a href="#三-编写第一个Controller" class="headerlink" title="三.编写第一个Controller"></a>三.编写第一个Controller</h2><p>核心代码如下，我这里在Application同级新建了一个Controller目录，并在里面新建了HelloController类，类中提供了一个getHello方法，无参数传入，但是返回了一个字符串。</p>
 <p>在方法上面，我们加了一个RequestMapping，通过在浏览器访问  <strong>/Hello</strong> 我们可以调用这个方法，从而返回结果，</p>
@@ -356,7 +356,7 @@
 <p>如果当前已经运行项目，可以点击停止并重新启动。</p>
 <p>同样我们看到上面我所提到的运行成功日志后，我们打开浏览器，输入localhost:8080/Hello，其中8080是我们的端口号</p>
 <p>我们运行后，会在浏览器看到如下结果：</p>
-<p><img src="assets/1547642441090.png" alt="1547642441090"></p>
+<p><img src="/SpringBoot/2.快速入门/assets/1547642441090.png" alt="1547642441090"></p>
 <p>恭喜你，如果你看到如上结果，说明你的第一个接口写好了，你已经迈出了一大步了！</p>
 <p>What？你可能会嘲笑我了，这就Hello World ，怎么就一大步了，别急，下面我们深入探究一下。</p>
 <h1 id="点我回到目录"><a href="#点我回到目录" class="headerlink" title="点我回到目录"></a><a href="/SpringBoot/">点我回到目录</a></h1>

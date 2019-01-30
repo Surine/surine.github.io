@@ -309,29 +309,29 @@
 <h2 id="1-Jdk"><a href="#1-Jdk" class="headerlink" title="1. Jdk"></a>1. Jdk</h2><h2 id="2-IDE"><a href="#2-IDE" class="headerlink" title="2. IDE"></a>2. IDE</h2><h2 id="3-PostMan"><a href="#3-PostMan" class="headerlink" title="3.PostMan"></a>3.PostMan</h2><h2 id="4-Xampp"><a href="#4-Xampp" class="headerlink" title="4.Xampp"></a>4.Xampp</h2><p>我们直接使用Xampp来配置Apache+Mysql环境XAMPP（Apache+MariaDB+PHP+PERL）是一个功能强大的建站集成软件包。</p>
 <p>可以直接一键式配置服务。</p>
 <p>我们可以在 <a href="https://www.apachefriends.org/index.html" target="_blank" rel="noopener">Xampp官网</a>上下载安装包。</p>
-<p><img src="assets/1547796071649.png" alt="1547796071649"></p>
+<p><img src="/SpringBoot/1.环境搭建/assets/1547796071649.png" alt="1547796071649"></p>
 <p>这里我们我们是搭建Windows环境，所以我们下载Windows安装包。</p>
 <p>如果网速很慢，可以挂梯梯，也可以换别的网站下载。</p>
 <p>安装过程中可能会出现，UAC的警告提示，我们可以直接OK</p>
-<p><img src="assets/1547796543329.png" alt="1547796543329"></p>
+<p><img src="/SpringBoot/1.环境搭建/assets/1547796543329.png" alt="1547796543329"></p>
 <p>除此之外没什么问题，一路next即可，路径可以自行选择。</p>
 <p>安装完成后，我们可以看到运行面板。我们点击Apache和MySql的运行，启动成功会有阴影颜色提示。</p>
 <p>但是我启动的时候遇到了以下错误，如果你没有的话可以空过去这一段</p>
-<p><img src="assets/1547798010986.png" alt="1547798010986"></p>
+<p><img src="/SpringBoot/1.环境搭建/assets/1547798010986.png" alt="1547798010986"></p>
 <p>日志提示是端口占用，我们可以打开右边的Netstat，看看有哪些端口占用。</p>
-<p><img src="assets/1547798247338.png" alt="1547798247338"></p>
+<p><img src="/SpringBoot/1.环境搭建/assets/1547798247338.png" alt="1547798247338"></p>
 <p>这是我启动后的效果，80端口是httpd（也就是Xampp的http服务），443是被虚拟机占用了，那我就要添加一个空闲端口给httpd-ssl（也就是Xampp的https服务）比如说4433（上图中也有我改完的，找到4433可以看一下）</p>
 <p>怎么改？</p>
 <p>我们点击Apache后面的四个按钮中的Config，选择httpd.conf（解决80占用）或者httpd-ssl.conf(解决443占用)，打开你需要修改的端口文件</p>
 <p>如httpd-ssl.conf,把其中的433端口全部改成空闲的，保存，重新启动即可。</p>
 <p><strong>OK!</strong></p>
 <p>我们浏览器访问localhost</p>
-<p><img src="assets/1547798891809.png" alt="1547798891809"></p>
+<p><img src="/SpringBoot/1.环境搭建/assets/1547798891809.png" alt="1547798891809"></p>
 <p>看到如此界面就证明安装成功了！</p>
 <p>我们点击右上角phpMyAdmin</p>
-<p><img src="assets/1547798961024.png" alt="1547798961024"></p>
+<p><img src="/SpringBoot/1.环境搭建/assets/1547798961024.png" alt="1547798961024"></p>
 <p>出现如下界面就证明mysql的界面管理器就安装好了。</p>
-<p><img src="assets/1547799087895.png" alt="1547799087895"></p>
+<p><img src="/SpringBoot/1.环境搭建/assets/1547799087895.png" alt="1547799087895"></p>
 <p>我们可以看账户这里，在之后的配置中，我们可以使用root作为mysql账号，密码为空。</p>
 <p>Xampp到现在就算配置好了，具体数据库操作在后面再介绍。</p>
 <h1 id="点我回到目录"><a href="#点我回到目录" class="headerlink" title="点我回到目录"></a><a href="/SpringBoot/">点我回到目录</a></h1>

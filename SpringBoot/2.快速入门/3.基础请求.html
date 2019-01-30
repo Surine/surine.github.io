@@ -326,35 +326,35 @@
 <p>注解方面，register方法上面的注解RequestMapping我们上面提到过，他的value主要是我们的访问路径，而他的method主要是标识我们是一个GET方法，还是一个POST方法，或者其他，默认是GET，所以你需要GET方法的时候，也可以不写这个,这也就是我上面说，上篇文章学到的也是一个Get请求的原因了。</p>
 <p>此外我们看到方法中每个参数都有一个@RequestParam，这里我想你应该可以想到，也就是我们客户端访问时候的字段名，到后台分发处理的时候，可以对应成相应的参数，上次我们学到的getHello接口，仅仅是没有参数而已。</p>
 <p>好了，别的不多说，我们看看运行效果，点击运行后，我们在浏览器访问：localhost:8080/register</p>
-<p><img src="assets/1547707042067.png" alt="1547707042067"></p>
+<p><img src="/SpringBoot/2.快速入门/assets/1547707042067.png" alt="1547707042067"></p>
 <p>是一个错误页（PS：当本页面看不出什么东西来的时候，具体的错误可以去IDE控制台看），我们可以看到最后一行，name这个参数没有，产生这个的原因是这里的@RequestParam是默认每个字段必须要有值的，比如你想实现密码可以为空，你可以这么写</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@RequestParam</span>(value = <span class="string">"pswd"</span>, required = <span class="keyword">false</span>) String pswdFromClient</span><br></pre></td></tr></table></figure>
 <p> 当然这里面还有很多功能，比如设置默认值，想查看有的功能，可以使用快捷键 （按住Ctrl ，单击你要查看的方法，比如这里我们是RequestParam注解，就可以进入他的定义）</p>
 <p>那么我们正常应该怎么访问？</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">localhost:8080/register?name=surine&amp;pswd=12345</span><br></pre></td></tr></table></figure>
 <p>Get请求请自行补课，我们传入了name=surine&amp;pswd=12345,前端结果如下</p>
-<p><img src="assets/1547707810805.png" alt="1547707810805"></p>
+<p><img src="/SpringBoot/2.快速入门/assets/1547707810805.png" alt="1547707810805"></p>
 <p>后端控制台如下：</p>
-<p><img src="assets/1547707838737.png" alt="1547707838737"></p>
+<p><img src="/SpringBoot/2.快速入门/assets/1547707838737.png" alt="1547707838737"></p>
 <p>我们可以看到从前台发的东西传到后台来了，我们再来实施其他几种情况</p>
 <p>用户名正常，密码不为空：</p>
-<p><img src="assets/1547707956041.png" alt="1547707956041"></p>
-<p><img src="assets/1547707976276.png" alt="1547707976276"></p>
+<p><img src="/SpringBoot/2.快速入门/assets/1547707956041.png" alt="1547707956041"></p>
+<p><img src="/SpringBoot/2.快速入门/assets/1547707976276.png" alt="1547707976276"></p>
 <p>用户名正常，密码为空：</p>
-<p><img src="assets/1547708017369.png" alt="1547708017369"></p>
-<p><img src="assets/1547708033293.png" alt="1547708033293"></p>
+<p><img src="/SpringBoot/2.快速入门/assets/1547708017369.png" alt="1547708017369"></p>
+<p><img src="/SpringBoot/2.快速入门/assets/1547708033293.png" alt="1547708033293"></p>
 <p>OK，如果你看到你期望的结果了，那么恭喜你，简单的get请求你已经会了。</p>
 <h2 id="2-Post请求"><a href="#2-Post请求" class="headerlink" title="2. Post请求"></a>2. Post请求</h2><p>  继续在HelloController中添加方法</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 通过post请求去注册</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@param</span> nameFromClient  用户名</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@param</span> pswdFromClient  密码</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@return</span> 状态信息</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="meta">@RequestMapping</span>(value = <span class="string">"/login"</span>, method = RequestMethod.POST)</span><br><span class="line">    <span class="function"><span class="keyword">public</span> String <span class="title">login</span><span class="params">(@RequestParam(value = <span class="string">"name"</span>)</span> String nameFromClient,</span></span><br><span class="line"><span class="function">                        @<span class="title">RequestParam</span><span class="params">(value = <span class="string">"pswd"</span>)</span> String pswdFromClient) </span>&#123;</span><br><span class="line">        </span><br><span class="line">        System.out.println(<span class="string">"姓名"</span>+nameFromClient);</span><br><span class="line">        System.out.println(<span class="string">"密码"</span>+pswdFromClient);</span><br><span class="line">        </span><br><span class="line">        <span class="keyword">if</span>(nameFromClient.equals(<span class="string">"surine"</span>))&#123;</span><br><span class="line">            <span class="keyword">return</span> <span class="string">"无此用户"</span>;</span><br><span class="line">        &#125;<span class="keyword">else</span>&#123;</span><br><span class="line">            <span class="keyword">return</span> <span class="string">"登录成功"</span>;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
 <p>实现过Get请求的你对Post请求也没什么疑问吧，实现一个Get和实现Post是一样的，唯一的不同就是RequestMapping的method被我们改成了post。</p>
 <p>那我们运行修改后的项目，打开Postman </p>
-<p><img src="assets/1547709616459.png" alt="1547709616459"></p>
+<p><img src="/SpringBoot/2.快速入门/assets/1547709616459.png" alt="1547709616459"></p>
 <p>图很粗糙，凑合看吧。</p>
 <p>第一步选择请求方法，然后填入我们的请求地址，点击Body填入相应字段和字段值，点击Send按钮，即可看到相应信息。</p>
-<p><img src="assets/1547709694559.png" alt="1547709694559"></p>
+<p><img src="/SpringBoot/2.快速入门/assets/1547709694559.png" alt="1547709694559"></p>
 <p>同样，我们后端收到了。</p>
 <p>再看一下另一种情况,账号为surine</p>
-<p><img src="assets/1547709738780.png" alt="1547709738780"></p>
+<p><img src="/SpringBoot/2.快速入门/assets/1547709738780.png" alt="1547709738780"></p>
 <p>可以看到我们后台的逻辑生效了。</p>
 <p>此外由于这次我们设置允许字段可以为空，所以两个字段必须全部填写。</p>
 <p>到这里你也学会了简单的Post请求了，可能你会有个小疑问，感觉看起来Get和Post请求一样啊，都是发数据然后获取相应结果，那什么时候需要get，什么时候需要post，这个其实也算计算机网络补课内容了。</p>
@@ -366,7 +366,7 @@
 <p>不多扯了，下面再看一个重要的实现。</p>
 <h2 id="3-Bean映射"><a href="#3-Bean映射" class="headerlink" title="3. Bean映射"></a>3. Bean映射</h2><p>bean自行补课 <a href="/SpringBoot/2.快速入门/0.技术补充.html">本部分技术补充</a></p>
 <p>这里越来越接近我们最后的基础项目的样子了，我们新建立一个Package，叫Entities（实体类），并且在其中建立一个名字叫UserEntity的类。</p>
-<p><img src="assets/1547710624847.png" alt="1547710624847"></p>
+<p><img src="/SpringBoot/2.快速入门/assets/1547710624847.png" alt="1547710624847"></p>
 <p>然后我们赋予它几个字段</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">UserEntity</span> </span>&#123;</span><br><span class="line">    <span class="keyword">private</span> String userName;  <span class="comment">//姓名</span></span><br><span class="line">    <span class="keyword">private</span> String passWord;  <span class="comment">//密码</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p>然后实现他的构造和getter/setter和toString方法，实现如下：</p>
@@ -383,11 +383,11 @@
 <p>由于是个默认get请求，所以打开浏览器。</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">http://localhost:8080/beanRegister?userName=surine&amp;passWord=123</span><br></pre></td></tr></table></figure>
 <p>我写了这样一个请求，结果如下</p>
-<p><img src="assets/1547711372524.png" alt="1547711372524"></p>
+<p><img src="/SpringBoot/2.快速入门/assets/1547711372524.png" alt="1547711372524"></p>
 <p>同理，如果我换个名字的话，</p>
-<p><img src="assets/1547711409054.png" alt="1547711409054"></p>
+<p><img src="/SpringBoot/2.快速入门/assets/1547711409054.png" alt="1547711409054"></p>
 <p>我们看一下后端控制台</p>
-<p><img src="assets/1547711454251.png" alt="1547711454251"></p>
+<p><img src="/SpringBoot/2.快速入门/assets/1547711454251.png" alt="1547711454251"></p>
 <p>两次打印的信息，可以看看是不是toString方法的内容，你也可以修改修改toString中相应的文字部分来看看。</p>
 <p>我想你应该对Springboot有一定的理解了，好多字段，或者其他只要对应就可以访问，正如我们刚才用的url</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">http://localhost:8080/beanRegister?userName=surine&amp;passWord=123</span><br></pre></td></tr></table></figure>
@@ -406,7 +406,7 @@
 <p>点击项目重新运行，浏览器</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">http://localhost:8080/returnJson?userName=surine&amp;passWord=123</span><br></pre></td></tr></table></figure>
 <p>嗯，下面这货这就是Json</p>
-<p><img src="assets/1547712870748.png" alt="1547712870748"></p>
+<p><img src="/SpringBoot/2.快速入门/assets/1547712870748.png" alt="1547712870748"></p>
 <p>对应字段和值，前端通过解析这段字符串就可以显示相应的界面，不过别着急，界面什么的都是浮云，真正的后端开发才不管什么界面不界面的。</p>
 <p>有了正确的json就是胜利。</p>
 <h2 id="4-续"><a href="#4-续" class="headerlink" title="4.续"></a>4.续</h2><p>好像还差点啥啊？</p>
