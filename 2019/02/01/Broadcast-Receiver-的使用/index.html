@@ -88,7 +88,7 @@
 <meta property="og:description" content="Broadcast-Receiver的使用最近在复习Android的知识，从最基础的开始深入探究，初学Android的时候，四大组件学的很茫然，其实最多的用到的也就是Activity，其他的接触的都不多。这里我们探究一下广播机制。 1.动态注册我们用As新建一个接收器。这里我们可以使用它的快捷新建的方式，右键包名新建一个Other，选择Broadcast Receiver即可快速新建接收器。 我们">
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="https://upload-images.jianshu.io/upload_images/2441545-d45d30e4978ae808.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
-<meta property="og:updated_time" content="2019-02-01T09:00:17.704Z">
+<meta property="og:updated_time" content="2019-02-01T09:02:27.010Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Broadcast Receiver 的使用">
 <meta name="twitter:description" content="Broadcast-Receiver的使用最近在复习Android的知识，从最基础的开始深入探究，初学Android的时候，四大组件学的很茫然，其实最多的用到的也就是Activity，其他的接触的都不多。这里我们探究一下广播机制。 1.动态注册我们用As新建一个接收器。这里我们可以使用它的快捷新建的方式，右键包名新建一个Other，选择Broadcast Receiver即可快速新建接收器。 我们">
@@ -410,7 +410,7 @@
 <p>我们看一下我们调用的这个intent构造吧，（按住Ctrl，单击new Intent的Intent）<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">// @param action The Intent action, such as ACTION_VIEW.</span><br><span class="line">    public Intent(String action) &#123;</span><br><span class="line">        setAction(action);</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure></p>
 <p>可以看到@param已做出解释，action是intent action，也就是我们前面一直提到的action，这样就全部对应起来啦。</p>
 <p>运行起来，点击按钮，会弹出相应提示。</p>
-<p>###4. 小结<br>这里总结一下。</p>
+<h3 id="4-小结"><a href="#4-小结" class="headerlink" title="4. 小结"></a>4. 小结</h3><p>这里总结一下。</p>
 <ol>
 <li>广播注册主要分为静态注册和动态注册，其中值得我们关注的就是过滤器，通过设置过滤的action(动作)，接受自己所感兴趣的事情。</li>
 <li>上述例子中，开机自启动的实现如果不能达成效果也很正常，由于API的变更或者厂商的定制总会出现一些各种各样的问题。<br> 3.前面提起过，广播是全局的，你写的App发送广播，别的App也可以收到（如果注册了的话），别的App发你的也可以收到，这里你可以写两个Demo尝试一下。</li>
@@ -625,7 +625,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Broadcast-Receiver的使用"><span class="nav-number">1.</span> <span class="nav-text">Broadcast-Receiver的使用</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-动态注册"><span class="nav-number">1.0.1.</span> <span class="nav-text">1.动态注册</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-静态注册"><span class="nav-number">1.0.2.</span> <span class="nav-text">2. 静态注册</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-自定义广播"><span class="nav-number">1.0.3.</span> <span class="nav-text">3.自定义广播</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#5-有序广播"><span class="nav-number">1.0.4.</span> <span class="nav-text">5.有序广播</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#6-本地广播"><span class="nav-number">1.0.5.</span> <span class="nav-text">6. 本地广播</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#7-总结"><span class="nav-number">1.0.6.</span> <span class="nav-text">7 .总结</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Broadcast-Receiver的使用"><span class="nav-number">1.</span> <span class="nav-text">Broadcast-Receiver的使用</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-动态注册"><span class="nav-number">1.0.1.</span> <span class="nav-text">1.动态注册</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-静态注册"><span class="nav-number">1.0.2.</span> <span class="nav-text">2. 静态注册</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-自定义广播"><span class="nav-number">1.0.3.</span> <span class="nav-text">3.自定义广播</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-小结"><span class="nav-number">1.0.4.</span> <span class="nav-text">4. 小结</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#5-有序广播"><span class="nav-number">1.0.5.</span> <span class="nav-text">5.有序广播</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#6-本地广播"><span class="nav-number">1.0.6.</span> <span class="nav-text">6. 本地广播</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#7-总结"><span class="nav-number">1.0.7.</span> <span class="nav-text">7 .总结</span></a></li></ol></li></ol></div>
             
 
           </div>
