@@ -1,0 +1,848 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next gemini use-motion" lang="zh-Hans">
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="Android,Android硬件,">
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="VibrationEffect-这酥麻,不敢相信! 本文章大部分翻译自Android开发文档等 本文章所用的封装工具类来自Sutils,欢迎Star或者使用  1. 前言最近封装一个Android震动工具类，在封装时候发现Api26出现了新的方法，然后就翻看Android开发文档，发现还有点意思，同时借着写API的缘故就写了这篇文章，在写文章之前，我测试了一下我写的工具类，点击开始震动，把手机握在">
+<meta name="keywords" content="Android,Android硬件">
+<meta property="og:type" content="article">
+<meta property="og:title" content="VibrationEffect-这酥麻,不敢相信!">
+<meta property="og:url" content="https://surine.cn/2019/02/09/VibrationEffect-这酥麻-不敢相信/index.html">
+<meta property="og:site_name" content="苏·凌">
+<meta property="og:description" content="VibrationEffect-这酥麻,不敢相信! 本文章大部分翻译自Android开发文档等 本文章所用的封装工具类来自Sutils,欢迎Star或者使用  1. 前言最近封装一个Android震动工具类，在封装时候发现Api26出现了新的方法，然后就翻看Android开发文档，发现还有点意思，同时借着写API的缘故就写了这篇文章，在写文章之前，我测试了一下我写的工具类，点击开始震动，把手机握在">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="https://surine.cn/2019/02/09/VibrationEffect-这酥麻-不敢相信/1549705545873.png">
+<meta property="og:image" content="https://surine.cn/2019/02/09/VibrationEffect-这酥麻-不敢相信/1549714911579.png">
+<meta property="og:updated_time" content="2019-02-09T12:45:37.801Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="VibrationEffect-这酥麻,不敢相信!">
+<meta name="twitter:description" content="VibrationEffect-这酥麻,不敢相信! 本文章大部分翻译自Android开发文档等 本文章所用的封装工具类来自Sutils,欢迎Star或者使用  1. 前言最近封装一个Android震动工具类，在封装时候发现Api26出现了新的方法，然后就翻看Android开发文档，发现还有点意思，同时借着写API的缘故就写了这篇文章，在写文章之前，我测试了一下我写的工具类，点击开始震动，把手机握在">
+<meta name="twitter:image" content="https://surine.cn/2019/02/09/VibrationEffect-这酥麻-不敢相信/1549705545873.png">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Gemini',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="https://surine.cn/2019/02/09/VibrationEffect-这酥麻-不敢相信/">
+
+
+
+
+
+  <title>VibrationEffect-这酥麻,不敢相信! | 苏·凌</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope="" itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope="" itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">苏·凌</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">风月都好看，爱恨都浪漫。</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br>
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br>
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br>
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-springboot学习笔记">
+          <a href="/SpringBoot/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br>
+            
+            SpringBoot学习笔记
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-commonweal">
+          <a href="/404/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-heartbeat"></i> <br>
+            
+            公益404
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-图片">
+          <a href="/photo" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br>
+            
+            图片
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://surine.cn/2019/02/09/VibrationEffect-这酥麻-不敢相信/">
+
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Surine">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="苏·凌">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">VibrationEffect-这酥麻,不敢相信!</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-02-09T16:45:27+08:00">
+                2019-02-09
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
+                  <a href="/categories/Android开发笔记/" itemprop="url" rel="index">
+                    <span itemprop="name">Android开发笔记</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h1 id="VibrationEffect-这酥麻-不敢相信"><a href="#VibrationEffect-这酥麻-不敢相信" class="headerlink" title="VibrationEffect-这酥麻,不敢相信!"></a>VibrationEffect-这酥麻,不敢相信!</h1><blockquote>
+<p>本文章大部分翻译自Android开发文档等</p>
+<p>本文章所用的封装工具类来自<a href="https://github.com/Surine/Sutils" target="_blank" rel="noopener">Sutils</a>,欢迎Star或者使用</p>
+</blockquote>
+<h2 id="1-前言"><a href="#1-前言" class="headerlink" title="1. 前言"></a>1. 前言</h2><p>最近封装一个Android震动工具类，在封装时候发现Api26出现了新的方法，然后就翻看Android开发文档，发现还有点意思，同时借着写API的缘故就写了这篇文章，在写文章之前，我测试了一下我写的工具类，点击开始震动，把手机握在手里的时候，我都产生了大胆的想法了……</p>
+<p>请自动忽略标题。</p>
+<h2 id="2-旧版API"><a href="#2-旧版API" class="headerlink" title="2. 旧版API"></a>2. 旧版API</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment">  * 设置震动</span></span><br><span class="line"><span class="comment">  * <span class="doctag">@param</span> context 上下文</span></span><br><span class="line"><span class="comment">  * <span class="doctag">@param</span> milliseconds 震动时长</span></span><br><span class="line"><span class="comment">  * */</span></span><br><span class="line"> <span class="meta">@SuppressLint</span>(<span class="string">"MissingPermission"</span>)</span><br><span class="line"> <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">startVibrate</span><span class="params">(Context context, <span class="keyword">long</span> milliseconds)</span></span>&#123;</span><br><span class="line">     check(context);</span><br><span class="line">     vibrator = (Vibrator)context.getSystemService(VIBRATOR_SERVICE);</span><br><span class="line">     vibrator.vibrate(milliseconds);</span><br><span class="line"> &#125;</span><br></pre></td></tr></table></figure>
+<p>上面这个方法，我们可能会经常用到，学习震动的时候也见到过，核心代码两行。传入震动时长即可震动，注意单位是ms</p>
+<a id="more"></a>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment">      * 开始震动</span></span><br><span class="line"><span class="comment">      * <span class="doctag">@param</span> context 上下文</span></span><br><span class="line"><span class="comment">      * <span class="doctag">@param</span> pattern 震动规则</span></span><br><span class="line"><span class="comment">      *                例如&#123;100,200,300,400&#125;表示震动100ms</span></span><br><span class="line"><span class="comment">      *                等待200ms，震动300ms，等待400ms，循环</span></span><br><span class="line"><span class="comment">      *                规则见repeat参数</span></span><br><span class="line"><span class="comment">      * <span class="doctag">@param</span> repeat 重复 传入0就是从开头一直重复下去，</span></span><br><span class="line"><span class="comment">      *               传入-1就是不重复震动。</span></span><br><span class="line"><span class="comment">      *               传入其他数字，就是从index下标开始重复</span></span><br><span class="line"><span class="comment">      * */</span></span><br><span class="line">     <span class="meta">@SuppressLint</span>(<span class="string">"MissingPermission"</span>)</span><br><span class="line">     <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">startVibrate</span><span class="params">(Context context, <span class="keyword">long</span>[] pattern, <span class="keyword">int</span> repeat)</span></span>&#123;</span><br><span class="line">         check(context);</span><br><span class="line">         vibrator = (Vibrator)context.getSystemService(VIBRATOR_SERVICE);</span><br><span class="line">         vibrator.vibrate(pattern,repeat);</span><br><span class="line">     &#125;</span><br></pre></td></tr></table></figure>
+<p>这个方法更高级一些，我们会传入一个long数组，一个int的值，其中long数组是震动规则，在上面的javadoc里面都写的很详细了，我们写一个最短的规则，让它一直循环就可以达到震震停停的效果，其中repeat参数就是控制重复循环的，其中0就是正常循环（从头一遍一遍的），-1就是不循环，而如果传入2，就是第二次从pattern[2]开始循环。</p>
+<p>假如我们循环了，如何让他们停下来？</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment">   * 停止震动</span></span><br><span class="line"><span class="comment">   * */</span></span><br><span class="line">  <span class="meta">@SuppressLint</span>(<span class="string">"MissingPermission"</span>)</span><br><span class="line">  <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">stopVibrate</span><span class="params">()</span></span>&#123;</span><br><span class="line">       <span class="keyword">if</span>(vibrator != <span class="keyword">null</span>)</span><br><span class="line">           vibrator.cancel();</span><br><span class="line">  &#125;</span><br></pre></td></tr></table></figure>
+<p>就是调用cancel方法即可。</p>
+<p>同时我们最重要的两个部分，一是要有振动器这个硬件，另一个是获取了震动权限。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment">    * 是否有震动器</span></span><br><span class="line"><span class="comment">    * <span class="doctag">@param</span> context 上下文</span></span><br><span class="line"><span class="comment">    * <span class="doctag">@return</span> true有 false没有</span></span><br><span class="line"><span class="comment">    * */</span></span><br><span class="line">   <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">boolean</span> <span class="title">hasVibrator</span><span class="params">(Context context)</span></span>&#123;</span><br><span class="line">       check(context);</span><br><span class="line">       vibrator = (Vibrator)context.getSystemService(VIBRATOR_SERVICE);</span><br><span class="line">       <span class="keyword">return</span> vibrator.hasVibrator();</span><br><span class="line">   &#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">uses-permission</span> <span class="attr">android:name</span>=<span class="string">"android.permission.VIBRATE"</span> /&gt;</span></span><br></pre></td></tr></table></figure>
+<p>上面是一些旧版的API，目前已经标识过时了，取而代之的就是我们下面要说的内容，这是API26加入的新内容。</p>
+<h2 id="3-VibrationEffect"><a href="#3-VibrationEffect" class="headerlink" title="3.VibrationEffect"></a>3.VibrationEffect</h2><p>这玩意还挺新奇，我查了一下API，决定挑重点翻译一下，鉴于我我蹩脚的英语水平，特地请来Google翻译来帮忙，请见谅……下列引用内容原版来自Android Sdk doc 和 Android Developer，其他内容为自行补充。</p>
+<p><strong>VibrationEffect</strong>是一个抽象类，官方给他的解释如下：</p>
+<blockquote>
+<p>VibrationEffect描述了由振动器执行的触觉效果。 这些效果可能是任何数量的因素，从单一振动到复杂波形。</p>
+</blockquote>
+<p>有了它，我们就可以实现单一振动（也就是传入时长），复杂振动（也就是波形）。</p>
+<p>我们来看看它的几个方法。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> VibrationEffect <span class="title">createOneShot</span><span class="params">(<span class="keyword">long</span> milliseconds,<span class="keyword">int</span> amplitude)</span></span></span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>功能：创造一次性振动。 一次振动将以指定的振幅在指定的时间段内持续振动，然后停止。</p>
+<p>milliseconds：振动的毫秒数。 这必须是一个正数。</p>
+<p>amplitude：振动的强度。 它必须是1到255之间的值，或DEFAULT_AMPLITUDE。</p>
+</blockquote>
+<p>我们可以看到这个方法，是创建单一震动的，传入的第二个参数，是我们之前的API所没遇到过的，是0-255标识的振动强度，同时我们可以传入标准振动的常量值【DEFAULT_AMPLITUDE】</p>
+<p>我们在Sdk中可以看到这个值是-1。</p>
+<p><img src="/2019/02/09/VibrationEffect-这酥麻-不敢相信/1549705545873.png" alt="1549705545873"></p>
+<p>其实可以看出，官方为了写强度范围判断还费了好大力气，不清楚他们为什么要弄这么个默认值，具体这个-1代表多大的强度，我也不去考究了。</p>
+<p>下面是我工具类中封装的，经过刚才的分析，相信你已经可以理解了。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment">     * API26  普通震动</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@param</span> context 上下文</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@param</span> milliseconds 震动时长</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@param</span> amplitude 振动强度,1到255之间的值，或者DEFAULT_AMPLITUDE</span></span><br><span class="line"><span class="comment">     * */</span></span><br><span class="line">    <span class="meta">@SuppressLint</span>(<span class="string">"MissingPermission"</span>)</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">startVibrate</span><span class="params">(Context context, <span class="keyword">long</span> milliseconds, <span class="keyword">int</span> amplitude)</span></span>&#123;</span><br><span class="line">        check(context);</span><br><span class="line">        vibrator = (Vibrator)context.getSystemService(VIBRATOR_SERVICE);</span><br><span class="line">        <span class="keyword">if</span> (Build.VERSION.SDK_INT &gt;= Build.VERSION_CODES.O) &#123;</span><br><span class="line">            vibrator.vibrate(VibrationEffect.createOneShot(milliseconds,amplitude));</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+<p>下面是另一个方法。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> VibrationEffect <span class="title">createWaveform</span> <span class="params">(<span class="keyword">long</span>[] timings,</span></span></span><br><span class="line"><span class="function"><span class="params">                <span class="keyword">int</span>[] amplitudes,</span></span></span><br><span class="line"><span class="function"><span class="params">                <span class="keyword">int</span> repeat)</span></span></span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>功能：创建波形振动。 波形振动是可能重复的一系列定时和幅度对。 对于每对，振幅数组中的值确定振动的强度，并且时序数组中的值确定振动的时间长度。 幅度为0意味着没有振动（即关闭），并且将忽略具有定时值0的任何对。要使模式重复，请将索引传递到开始重复的时序数组，或-1以禁用重复。</p>
+<p>timings：定时/幅度对的定时值。 定时值为0将导致该对被忽略。</p>
+<p>amplitudes：定时/幅度对的幅度值。 幅度值必须介于0到255之间，或等于DEFAULT_AMPLITUDE。 幅度值为0意味着关闭。</p>
+<p>repeat：要重复的时序数组的索引，如果你不想重复，则返回-1。</p>
+</blockquote>
+<p>可以看到createWaveform可以通过时长和振幅和重复来规定振动模式。</p>
+<p>timings也即是旧API中的pattern数组，不需要再重复，只不过上面没提到，如果传入了0，将被忽略。</p>
+<p>amplitudes是振幅值数组，同样我们要遵守数据规定。</p>
+<p>repeat也是之前提过，可以通过传入0来实现普通重复，传入数组下标来实现高级重复，传入-1停止重复。</p>
+<p>这样你就可以创作一个很舒服的振动效果……到底有多舒服，我也没试过……自行实践吧。</p>
+<p>这个方法还有一个重载，省去了amplitudes，他默认的amplitudes是0和DEFAULT_AMPLITUDE的交替</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> VibrationEffect <span class="title">createWaveform</span> <span class="params">(<span class="keyword">long</span>[] timings, <span class="keyword">int</span> repeat)</span></span></span><br></pre></td></tr></table></figure>
+<p>我们可以看到它的实现</p>
+<p><img src="/2019/02/09/VibrationEffect-这酥麻-不敢相信/1549714911579.png" alt="1549714911579"></p>
+<p>下面是我的封装</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment">      * API26 波形震动</span></span><br><span class="line"><span class="comment">      * <span class="doctag">@param</span> context 上下文</span></span><br><span class="line"><span class="comment">      * <span class="doctag">@param</span> timings 交替开关定时的模式，从关闭开始。0的定时值将导致定时/振幅对被忽略。</span></span><br><span class="line"><span class="comment">      * <span class="doctag">@param</span> amplitudes 振幅值中的振幅值。振幅值必须为0和255之间，或为DEFAULT_AMPLITUDE。振幅值为0意味着断开。</span></span><br><span class="line"><span class="comment">      * <span class="doctag">@param</span> repeat 振动重复的模式，如果您不想重复，则将索引放入计时数组中重复，或者-1。</span></span><br><span class="line"><span class="comment">      * */</span></span><br><span class="line">     <span class="meta">@SuppressLint</span>(<span class="string">"MissingPermission"</span>)</span><br><span class="line">     <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">startVibrateWave</span><span class="params">(Context context, <span class="keyword">long</span>[] timings, <span class="keyword">int</span>[] amplitudes, <span class="keyword">int</span> repeat)</span></span>&#123;</span><br><span class="line">         check(context);</span><br><span class="line">         vibrator = (Vibrator)context.getSystemService(VIBRATOR_SERVICE);</span><br><span class="line">         <span class="keyword">if</span> (Build.VERSION.SDK_INT &gt;= Build.VERSION_CODES.O) &#123;</span><br><span class="line">             vibrator.vibrate(VibrationEffect.createWaveform(timings,amplitudes,repeat));</span><br><span class="line">         &#125;</span><br><span class="line">     &#125;</span><br></pre></td></tr></table></figure>
+<p>上面就是VibrationEffect类的三个对外方法，还有一个负责序列化的方法就不提了。</p>
+<h2 id="4-总结"><a href="#4-总结" class="headerlink" title="4. 总结"></a>4. 总结</h2><p>本文章一方面是探讨一下新版的API，另一方面是为Sutils-Vibrates做详细文档。</p>
+<p>这里再总结一下Sutils-Vibrates的使用原则。</p>
+<ul>
+<li>使用时请注意配置context全局初始化</li>
+<li>注意添加震动权限</li>
+<li>在特殊的设备上注意振动的是否有判断器 </li>
+<li>启动循环振动之后，要使用stopVibrate停止震动</li>
+</ul>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Android/" rel="tag"># Android</a>
+          
+            <a href="/tags/Android硬件/" rel="tag"># Android硬件</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2019/02/06/时间记录/" rel="next" title="时间记录">
+                <i class="fa fa-chevron-left"></i> 时间记录
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name">Surine</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">8</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">4</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">14</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="https://github.com/surine" target="_blank" title="GitHub">
+                      
+                        <i class="fa fa-fw fa-github"></i>GitHub</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="mailto:surinx@163.com" target="_blank" title="E-Mail">
+                      
+                        <i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#VibrationEffect-这酥麻-不敢相信"><span class="nav-number">1.</span> <span class="nav-text">VibrationEffect-这酥麻,不敢相信!</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-前言"><span class="nav-number">1.1.</span> <span class="nav-text">1. 前言</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-旧版API"><span class="nav-number">1.2.</span> <span class="nav-text">2. 旧版API</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-VibrationEffect"><span class="nav-number">1.3.</span> <span class="nav-text">3.VibrationEffect</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4-总结"><span class="nav-number">1.4.</span> <span class="nav-text">4. 总结</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-github"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Surine</span>
+
+  
+</div>
+
+
+
+
+
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
