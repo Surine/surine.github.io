@@ -381,8 +381,7 @@
 
       
         
-          
-            <h1 id="拼夕夕2018校招：最大乘积"><a href="#拼夕夕2018校招：最大乘积" class="headerlink" title="拼夕夕2018校招：最大乘积"></a>拼夕夕2018校招：最大乘积</h1><blockquote>
+          <h1 id="拼夕夕2018校招：最大乘积"><a href="#拼夕夕2018校招：最大乘积" class="headerlink" title="拼夕夕2018校招：最大乘积"></a>拼夕夕2018校招：最大乘积</h1><blockquote>
 <p>这道题目来自 2018年拼夕夕的校招，我从牛客网上刷到这个题。<br><a href="https://www.nowcoder.com/practice/5f29c72b1ae14d92b9c3fa03a037ac5f" target="_blank" rel="noopener">https://www.nowcoder.com/practice/5f29c72b1ae14d92b9c3fa03a037ac5f</a></p>
 </blockquote>
 <p>题目可以自行去看，我这里再简单提一下。</p>
@@ -390,39 +389,13 @@
 <p>示例如下。<br><img src="https://upload-images.jianshu.io/upload_images/2441545-de2572d41430cc20.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="image.png"></p>
 <h2 id="二-分析"><a href="#二-分析" class="headerlink" title="二.分析"></a>二.分析</h2><h4 id="先简单提一下："><a href="#先简单提一下：" class="headerlink" title="先简单提一下："></a>先简单提一下：</h4><p>以前刷LeetCode是直接写方法，现在用牛客这个在线编译器还不太习惯。<br>首先我是用java写的，牛客这里的java代码，会要求写一个Main类，然后写main方法，其次，输入是需要写从控制台读取，输出是运算结果，所以读取数据是需要自己写的。<br>再就是java要导包，其实记几个重要的包就可以满足了。<br>千万不要以为java 可以这么写：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">important java.*;</span><br></pre></td></tr></table></figure></p>
 <p>java里面这么导包是不可以的。</p>
-<h4 id="正式分析："><a href="#正式分析：" class="headerlink" title="正式分析："></a>正式分析：</h4><p>看分析可以对照代码看，我贴的代码分为了几个部分，可以对应着看。</p>
-<p><strong>A： 输入</strong><br> 最开始是想着怎么输入，用了一个nextLine读取一行，然后又用split切片，怎么也AC不过，后来发现不能这么写，于是就去参考了大佬的输入（仅仅是输入部分……哈哈哈），发现他写的是先输入n这个值，然后再输入数据，那我就觉得这个题目出的不严谨……后来看了一道腾讯的，就很清楚让你先输入什么，再输入什么。</p>
-<p>常刷LeetCode，对于这种不太熟悉，暂且不考虑，这不是我们的重点，我们从控制台接收这个数组，存在myData 里，这里注意要是Long型的，否则可能会有溢出之类的。</p>
-<p><strong>B：排序</strong><br> 一开始想的很复杂，情况各异，主要是局限于他所强调的On的算法复杂度，但是对于算法题的话，我觉得不太可能是让你一种一种的去想，于是干脆换了个思路。</p>
-<p>由于它要求On的复杂度，所以我就一直没有考虑排序。<br>Java里面Arrays.sort()方法是一个封装好的排序方法，里面是二轴快排，对于这个排序比快速排序高级一些，但是不太了解，感兴趣的可以自行研究研究。</p>
-<p>但是最后实在想不出好方法，然后我就用了这个方法。</p>
-<p><strong>C：处理</strong><br> 可以看我对排完序的数据进行的操作，我的思路是，排好序的数组，如果要找三个数的乘积最大，只有两种情况，<br><strong>case 1.一种是数组的第0位，第1位和最后一位</strong><br><strong>case 2.第二种是数组的倒数三位</strong></p>
-<p>然后再从这两种情况里选到底是哪个大。<br>最后输出就是所求。</p>
-<p>那为什么会这样呢？<br>我们举个例子。</p>
-<p>这里是有&gt;=2个负数的情况。<br>原始数据： -2 -3 -1 1 0 4 3<br>排序后：-3 -2 -1 0 1 3 4<br>所求的case 1 ： -3 <em> -2 </em> 4 = 24<br>所求的case 2 ：1 <em> 3 </em> 4 = 12<br>那么最后的输出即是24</p>
-<p>我们分析简单情况，假如说数组中只有正数和0，那么最大值乘积一定产生在排序后的数组的最后3位 【即case2】</p>
-<p>此外，众所周知，负负得正，则肯定会有两个负数 再乘一个正数产生最大值的情况。<br>那最大值会在哪里产生，负负得正，我们就要找两个最小的负数，如上面一个例子，-3 和 -2 ，求出正数后，只需再找一个最大值即可，从哪里产生？当然是最后一位。 【即case1】</p>
-<p>有童鞋看到这里可能就想着分case1和case2来判断了，但是这里其实就像我那样写即可，只需要比较一下哪个大就OK。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><span class="line">import java.io.*;</span><br><span class="line">import java.util.*;</span><br><span class="line"> </span><br><span class="line">public class Main&#123;</span><br><span class="line">   public static void main(String[] args) throws Exception&#123;</span><br><span class="line">        long sum = 1;</span><br><span class="line">       </span><br><span class="line">        //A，</span><br><span class="line">       //输入数据，秀儿。</span><br><span class="line">        Scanner sc = new Scanner(System.in);</span><br><span class="line">        int n = sc.nextInt();</span><br><span class="line">        long[] myData = new long[n];</span><br><span class="line">        for (int i = 0; i &lt; n ; i++) &#123;</span><br><span class="line">            myData[i] = sc.nextLong();</span><br><span class="line">        &#125;</span><br><span class="line">    </span><br><span class="line">        //B，</span><br><span class="line">       //排序</span><br><span class="line">       Arrays.sort(myData);</span><br><span class="line"> </span><br><span class="line">        //C，</span><br><span class="line">       //排序之后，从起始位置开始取值，有两种情况。</span><br><span class="line">       //第一种：0位 * 1位 * 最后一位</span><br><span class="line">       //第二种：最后一位 * 倒二 * 倒3</span><br><span class="line">       //最大值只产生于这两种情况中</span><br><span class="line">       long s1 = myData[0] * myData[1] * myData[n - 1];</span><br><span class="line">       long s2 = myData[n - 1] * myData[n - 2] * myData[n - 3];</span><br><span class="line">       sum = s1 &gt; s2 ? s1 : s2;</span><br><span class="line"> </span><br><span class="line">       </span><br><span class="line">       //打印最终值</span><br><span class="line">       System.out.print(sum);</span><br><span class="line">           </span><br><span class="line">   &#125;  </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h2 id="三-运行结果"><a href="#三-运行结果" class="headerlink" title="三. 运行结果"></a>三. 运行结果</h2><p>我们先看题目的时空限制。<br><img src="https://upload-images.jianshu.io/upload_images/2441545-2b65787228a034be.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt=""></p>
-<p>看看我写的程序的时空<br><img src="https://upload-images.jianshu.io/upload_images/2441545-cc2befe76cdd78b9.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="image.png"></p>
-<p>其实是在它的要求之内的，只不过对于On我还真是没别的思路了。<br>但是个人觉得我这个方法还是挺通俗易懂的，大致浏览了一下别人的算法，也有和我类似的实现，下面再说一个别的大佬的实现。</p>
-<h2 id="四-其他实现"><a href="#四-其他实现" class="headerlink" title="四. 其他实现"></a>四. 其他实现</h2><p>我们看一下湖南大学<a href="https://www.nowcoder.com/profile/7562537" target="_blank" rel="noopener">secndf</a>大佬的实现。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line"> /**</span><br><span class="line"> *  思路：三个数乘积最大，那么肯定包含其中最大的数，然后就只要比较最小的两个数乘积和第二第三大的两个数乘积。</span><br><span class="line"> *  m1,m2是最小的两个数，max,h2,h1为第一/二/三大的数</span><br><span class="line"> */</span><br><span class="line">public static long maxTriMultiply(long A[])&#123;</span><br><span class="line">    long m1 = Integer.MAX_VALUE, m2 = Integer.MAX_VALUE, h1 = Integer.MIN_VALUE, h2 = Integer.MIN_VALUE, max = Integer.MIN_VALUE;</span><br><span class="line"> </span><br><span class="line"></span><br><span class="line">   for(int i=0;i &lt; A.length;++i)&#123;</span><br><span class="line">        if(A[i]&gt;max)&#123;</span><br><span class="line">            h1=h2;</span><br><span class="line">            h2=max;</span><br><span class="line">            max = A[i];</span><br><span class="line">        &#125;else if(A[i]&gt;h2)&#123;</span><br><span class="line">            h1=h2;</span><br><span class="line">            h2 = A[i];</span><br><span class="line">        &#125;else if(A[i]&gt;h1)&#123;</span><br><span class="line">            h1=A[i];</span><br><span class="line">        &#125;</span><br><span class="line">        if(A[i] &lt; m1)&#123;</span><br><span class="line">            m2=m1;</span><br><span class="line">            m1=A[i];</span><br><span class="line">        &#125;else if(A[i] &lt; m2)</span><br><span class="line">            m2=A[i];</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line"> </span><br><span class="line">    max = max * m1 * m2 &gt; max * h1 * h2 ? max * m1 * m2 : max * h1 * h2;</span><br><span class="line">    return max;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>可以看到，他确定了两个最小的数，三个最大的数。<br>然后比较了我上面所提到的case1 和 case2 两种情况</p>
-<p>与我不同的是，他为了实现On的算法，仅用了一遍遍历来找这些值。【自愧不如，以为要找到它们很麻烦，就没多想】</p>
-<p>其实仔细看来也并不麻烦，举个例子，我们用简单选择排序的时候是怎么操作的？就是确定一个值，然后不断找比它小的值，找遍所有，确定最小值的序号，再进行交换，这里也是，只不过多了 第 n 小（大）的说法，</p>
-<p>举个例子。<br>-1 4 2 0 1<br>我们来找最大值。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">if(A[i]&gt;max)&#123;</span><br><span class="line">   h1=h2;</span><br><span class="line">   h2=max;</span><br><span class="line">   max = A[i];</span><br><span class="line"> &#125;</span><br></pre></td></tr></table></figure></p>
-<p><strong>第一轮</strong><br>A[0] &gt; max(当前是MIN_VALUE)<br>h1取h2的值(当前是MIN_VALUE)，<br>h2取max的值(当前是MIN_VALUE),<br>max取A[i] (当前是-1)</p>
-<p><strong>第二轮</strong><br>A[1] &gt; max(当前是-1)<br>h1取h2的值(当前是MIN_VALUE)，<br>h2取max的值(当前是-1),<br>max取A[i] (当前是4)</p>
-<p><strong>第三轮</strong><br>A[2] &lt; max(当前是4)</p>
-<p>第四轮，第五轮，已经无需再写了，我们的最大值已经找到了。<br>if也进不去了。</p>
-<p>他这里这个变量名取的不太好，容易让人误解。<br>感兴趣可以分析一下这个过程，以后要是有类似的要挑选最大，第二大，最小，第二小的题，就可以直接用这个方法啦。</p>
-<h2 id="五-总结"><a href="#五-总结" class="headerlink" title="五. 总结"></a>五. 总结</h2><p>今天是2019 年情人节，上午起的很晚，刷了这道题之后就中午吃饭了，下午朋友叫我出去玩，本身要写本文的也搁置了，直到晚上才写完。</p>
-<p>考研这几天也要下成绩了，估计考的也不好，没抱太大希望。<br>多刷刷算法题，涨涨知识吧。<br>反正复试和找工作都需要算法。</p>
-<p>加油！<br>无论如何，都相信自己可以的！</p>
-
-          
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2019/02/14/拼夕夕2018校招：最大乘积/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>

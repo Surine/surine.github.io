@@ -90,7 +90,7 @@
 <meta property="og:image" content="https://upload-images.jianshu.io/upload_images/2441545-de2572d41430cc20.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
 <meta property="og:image" content="https://upload-images.jianshu.io/upload_images/2441545-2b65787228a034be.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
 <meta property="og:image" content="https://upload-images.jianshu.io/upload_images/2441545-cc2befe76cdd78b9.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
-<meta property="og:updated_time" content="2019-02-14T13:34:11.406Z">
+<meta property="og:updated_time" content="2019-02-14T13:37:46.131Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="拼夕夕2018校招：最大乘积">
 <meta name="twitter:description" content="拼夕夕2018校招：最大乘积 这道题目来自 2018年拼夕夕的校招，我从牛客网上刷到这个题。https://www.nowcoder.com/practice/5f29c72b1ae14d92b9c3fa03a037ac5f  题目可以自行去看，我这里再简单提一下。 一. 题目给定一个无序数组，包含正数、负数和0，要求从中找出3个数的乘积，使得乘积最大，要求时间复杂度：O(n)，空间复杂度：O(1">
@@ -394,6 +394,7 @@
 <p>示例如下。<br><img src="https://upload-images.jianshu.io/upload_images/2441545-de2572d41430cc20.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="image.png"></p>
 <h2 id="二-分析"><a href="#二-分析" class="headerlink" title="二.分析"></a>二.分析</h2><h4 id="先简单提一下："><a href="#先简单提一下：" class="headerlink" title="先简单提一下："></a>先简单提一下：</h4><p>以前刷LeetCode是直接写方法，现在用牛客这个在线编译器还不太习惯。<br>首先我是用java写的，牛客这里的java代码，会要求写一个Main类，然后写main方法，其次，输入是需要写从控制台读取，输出是运算结果，所以读取数据是需要自己写的。<br>再就是java要导包，其实记几个重要的包就可以满足了。<br>千万不要以为java 可以这么写：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">important java.*;</span><br></pre></td></tr></table></figure></p>
 <p>java里面这么导包是不可以的。</p>
+<a id="more"></a>
 <h4 id="正式分析："><a href="#正式分析：" class="headerlink" title="正式分析："></a>正式分析：</h4><p>看分析可以对照代码看，我贴的代码分为了几个部分，可以对应着看。</p>
 <p><strong>A： 输入</strong><br> 最开始是想着怎么输入，用了一个nextLine读取一行，然后又用split切片，怎么也AC不过，后来发现不能这么写，于是就去参考了大佬的输入（仅仅是输入部分……哈哈哈），发现他写的是先输入n这个值，然后再输入数据，那我就觉得这个题目出的不严谨……后来看了一道腾讯的，就很清楚让你先输入什么，再输入什么。</p>
 <p>常刷LeetCode，对于这种不太熟悉，暂且不考虑，这不是我们的重点，我们从控制台接收这个数组，存在myData 里，这里注意要是Long型的，否则可能会有溢出之类的。</p>
